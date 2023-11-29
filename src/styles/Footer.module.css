@@ -1,0 +1,10 @@
+/* test if this css is applied */
+
+.footer {
+  background-color: #f00;
+  padding: 1rem;
+}
+
+.footer p {
+  color: #ffb9b9;
+}

@@ -1,0 +1,18 @@
+/* test if this css is applied */
+
+.header {
+  background-color: #90a8f7;
+  padding: 1rem;
+}
+
+.header p {
+  color: #00f;
+}
+
+.navigation {
+  color: #2d00a8;
+}
+
+.link {
+  color: #002a61;
+}
