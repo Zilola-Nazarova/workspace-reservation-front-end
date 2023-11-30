@@ -7,23 +7,45 @@ const Header = () => (
     <nav className={styles.navigation}>
       <ul>
         <li className={styles.link}>
-          <NavLink to="/greeting">
-            Greeting
+          <NavLink to="/">
+            workspaces
           </NavLink>
         </li>
         <li className={styles.link}>
-          <NavLink to="/page1">
-            Page 1
+          <NavLink to="/reservations">
+            my reservations
           </NavLink>
         </li>
         <li className={styles.link}>
-          <NavLink to="/page2">
-            Page 2
+          <NavLink to="/new_reservation">
+            reserve
           </NavLink>
         </li>
         <li className={styles.link}>
-          <NavLink to="/page3">
-            Page 3
+          <NavLink to="/add_workspace">
+            add workspace
+          </NavLink>
+        </li>
+        <li className={styles.link}>
+          <NavLink to="/remove_workspace">
+            delete workspace
+          </NavLink>
+        </li>
+        {/* if the user is authenticated */}
+        <li className={styles.link}>
+          <NavLink to="/sign_out">
+            log out
+          </NavLink>
+        </li>
+        {/* if the user is not authenticated */}
+        <li className={styles.link}>
+          <NavLink to="/sign_in">
+            log in
+          </NavLink>
+        </li>
+        <li className={styles.link}>
+          <NavLink to="/sign_up">
+            sing up
           </NavLink>
         </li>
       </ul>
