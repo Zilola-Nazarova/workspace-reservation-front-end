@@ -26,6 +26,7 @@ const WorkspaceItem = ({ spaceId }) => {
 };
 
 WorkspaceItem.propTypes = {
-  spaceId: PropTypes.objectOf(PropTypes.number).isRequired,
+  spaceId: PropTypes.number.isRequired,
 };
+
 export default WorkspaceItem;
