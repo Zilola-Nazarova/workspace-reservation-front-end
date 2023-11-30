@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import { ... } from '../redux/.../...Slice';
-import { getGreetings } from './redux/greetings/greetingsSlice';
+import { getReservations } from './redux/reservations/reservationsSlice';
+import { getWorkspaces } from './redux/workspaces/workspacesSlice';
 
 import Layout from './routes/Layout';
 import HomePage from './routes/HomePage';
@@ -18,14 +19,14 @@ import ReservationsPage from './routes/ReservationsPage';
 import AddWorkspacePage from './routes/AddWorkspacePage';
 import RemoveWorkspacePage from './routes/RemoveWorkspacePage';
 
-// import Greeting from '../components/Greeting';
 import ErrorPage from './routes/ErrorPage';
 
 const Root = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getGreetings());
+    dispatch(getWorkspaces());
+    dispatch(getReservations());
   }, [dispatch]);
 
   return (
@@ -33,7 +34,6 @@ const Root = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="workspaces/:id" element={<WorkspaceDetailsPage />} />
-        {/* <Route path="workspaces/:id" element={<Greeting />} /> */}
 
         <Route path="/" element={<ProtectedLayout />}>
           <Route path="new_reservation" element={<NewReservationPage />} />

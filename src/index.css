@@ -31,6 +31,10 @@ main {
   display: flex;
 }
 
+img {
+  height: 2rem;
+}
+
 @media only screen and (min-width: 600px) {
   body {
     background-color: #00ff6a;
