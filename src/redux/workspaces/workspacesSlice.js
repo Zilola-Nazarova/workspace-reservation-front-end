@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const WORKSPACES_URL = 'http://127.0.0.1:3000/api/v1/greeting';
+const WORKSPACES_URL = 'http://127.0.0.1:3000/api/v1/workspaces';
 
 export const getWorkspaces = createAsyncThunk(
   'workspaces/getWorkspaces',
