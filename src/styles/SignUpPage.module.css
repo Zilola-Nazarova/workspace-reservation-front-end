@@ -1,0 +1,11 @@
+/* test if this css is applied */
+
+.page {
+  flex: 1;
+  padding: 1rem;
+  background-color: #8dffa0;
+}
+
+.page p {
+  color: #197a01;
+}
