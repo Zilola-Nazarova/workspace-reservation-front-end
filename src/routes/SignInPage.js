@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import styles from '../styles/SignInPage.module.css';
+import { setToken } from '../redux/auth/authSlice';
 
 const SignInPage = () => {
   const [username, setUsername] = useState('');
@@ -9,18 +11,27 @@ const SignInPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSignIn = async () => {
     try {
-      // Perform your authentication logic here
-      // For simplicity, let's assume a successful sign-in
-      // You may want to include actual authentication logic and error handling
-      // This example assumes a success and navigates to the home page
-      // Adjust this based on your authentication mechanism
       const response = await axios.post('http://localhost:3000/api/v1/sessions', {
         username,
       });
       if (response.status === 200) {
+        // Save the token in redux store
+        dispatch(setToken(response.user.authentication_token));
+
+        // Guys you can use useSelector to get the
+        // token from the store and isAuthenicated
+        // from the store to use it for conditional rendering.
+
+        // Save the user in local storage
+        localStorage.setItem('user', JSON.stringify(response.user));
+
+        // you can use this to get the user from
+        // local storage like his id or username. I hope Everything is clear now.
+
         setSuccessMessage(`User with username "${username}" successfully signed in. Redirecting to home page...`);
         setUsername('');
         setTimeout(() => {
