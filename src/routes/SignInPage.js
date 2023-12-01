@@ -20,14 +20,14 @@ const SignInPage = () => {
       });
       if (response.status === 200) {
         // Save the token in redux store
-        dispatch(setToken(response.user.authentication_token));
+        dispatch(setToken(response.data.user.authentication_token));
 
         // Guys you can use useSelector to get the
         // token from the store and isAuthenicated
         // from the store to use it for conditional rendering.
 
         // Save the user in local storage
-        localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('user', JSON.stringify(response.data.user));
 
         // you can use this to get the user from
         // local storage like his id or username. I hope Everything is clear now.
