@@ -1,7 +1,14 @@
 import styles from '../styles/AddWorkspacePage.module.css';
 
 const AddWorkspacePage = () => {
-  const handleSubmit = () => { };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('post[name]', e.target.name.value);
+    data.append('post[description]', e.target.description.value);
+    data.append('post[image]', e.target.image.files[0]);
+    console.log(data);
+  };
   return (
     <div className={styles.page}>
       <p>Create New Workspace</p>
