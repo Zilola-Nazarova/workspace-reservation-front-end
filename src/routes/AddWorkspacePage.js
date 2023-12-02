@@ -1,14 +1,29 @@
+import { useDispatch } from 'react-redux';
+import { postWorkspace } from '../redux/workspaces/workspacesSlice';
 import styles from '../styles/AddWorkspacePage.module.css';
 
 const AddWorkspacePage = () => {
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append('post[name]', e.target.name.value);
-    data.append('post[description]', e.target.description.value);
-    data.append('post[image]', e.target.image.files[0]);
+    data.append('workspace[name]', e.target.name.value);
+    data.append('workspace[description]', e.target.description.value);
+
+    if (e.target.image.files.length > 0) {
+      data.append('workspace[image]', e.target.image.files[0]);
+    }
+
     console.log(data);
+
+    try {
+      const resultAction = await dispatch(postWorkspace(data));
+      console.log('Workspace created successfully:', resultAction.payload);
+    } catch (error) {
+      console.error('Failed to create workspace:', error);
+    }
   };
+
   return (
     <div className={styles.page}>
       <p>Create New Workspace</p>
@@ -24,7 +39,7 @@ const AddWorkspacePage = () => {
           <textarea
             name="description"
             id="description"
-            rows="4" // Set the number of visible lines
+            rows="4"
             cols="50"
           />
         </label>
