@@ -27,6 +27,7 @@ const AddWorkspacePage = () => {
           Image
           <input type="file" name="image" id="image" />
         </label>
+        <button type="submit">Create</button>
       </form>
     </div>
   );
