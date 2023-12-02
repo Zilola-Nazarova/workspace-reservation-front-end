@@ -36,9 +36,9 @@ const Workspaces = () => {
               className={styles.space_card}
             >
               <Link to={`workspaces/${space.ID}`}>
-                <div className={styles.image}>
-                  {(space.image)
-                    ? <img alt={`${space.name}`} src={space.image} />
+                <div className={styles.image_url}>
+                  {(space.image_url)
+                    ? <img alt={`${space.name}`} src={space.image_url} />
                     : <img alt="not provided" src={noImage} />}
                 </div>
                 <div className={styles.space_info}>

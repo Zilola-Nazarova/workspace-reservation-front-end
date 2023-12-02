@@ -16,8 +16,8 @@ const WorkspaceItem = ({ spaceId }) => {
       {' '}
       <span>{ workspace.name }</span>
       <div>
-        {(workspace.image)
-          ? <img alt={`${workspace.name}`} src={workspace.image} />
+        {(workspace.image_url)
+          ? <img alt={`${workspace.name}`} src={workspace.image_url} />
           : <img alt="not provided" src={noImage} />}
       </div>
       <span>{ workspace.description }</span>
