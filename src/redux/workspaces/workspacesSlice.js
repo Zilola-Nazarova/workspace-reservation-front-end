@@ -12,7 +12,7 @@ export const getWorkspaces = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const postWorkspace = createAsyncThunk(
@@ -24,7 +24,7 @@ export const postWorkspace = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 const WorkspacesJson = [
