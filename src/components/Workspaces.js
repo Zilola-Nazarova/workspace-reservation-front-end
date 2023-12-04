@@ -1,5 +1,3 @@
-// import { useSelector } from 'react-redux';
-// import { useState } from 'react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -24,7 +22,7 @@ const Workspaces = () => {
       </p>
     );
   }
-  if (workspaces) {
+  if (workspaces.length > 0) {
     return (
       <div className={styles.page}>
         <h1>Workspaces go here</h1>
@@ -32,7 +30,7 @@ const Workspaces = () => {
         <ul className={styles.list}>
           {workspaces.map((space) => (
             <li
-              key={space.ID}
+              key={space.id}
               className={styles.space_card}
             >
               <Link to={`workspaces/${space.ID}`}>

@@ -1,9 +1,21 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { React, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getReservations } from '../redux/reservations/reservationsSlice';
+import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
+
 import WorkspaceItem from '../components/WorkspaceItem';
 import styles from '../styles/ReservationsPage.module.css';
 
 const ReservationsPage = () => {
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(getReservations(token));
+    dispatch(getWorkspaces(token));
+  }, [dispatch, token]);
+
   const { reservations, isLoading, error } = useSelector((store) => store.reservations);
 
   if (isLoading) {
@@ -22,7 +34,7 @@ const ReservationsPage = () => {
     );
   }
 
-  if (reservations) {
+  if (reservations.length > 0) {
     return (
       <div className={styles.page}>
         <h1>This is ReservationsPage</h1>

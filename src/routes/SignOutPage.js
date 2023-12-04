@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 import { clearToken } from '../redux/auth/authSlice';
+
 import styles from '../styles/SignOutPage.module.css';
 
 const SignOutPage = () => {
@@ -10,11 +13,11 @@ const SignOutPage = () => {
   const [goodbyeMessage, setGoodbyeMessage] = useState('');
 
   useEffect(() => {
-    // Clear user from local storage
-    localStorage.removeItem('user');
-
     // Set token to null in the Redux store
     dispatch(clearToken());
+    // Remove token from Cookies
+    Cookies.remove('token', { path: '' });
+    Cookies.remove('username', { path: '' });
 
     // Show a goodbye message
     setGoodbyeMessage('Goodbye! Redirecting to the home page in some seconds...');
