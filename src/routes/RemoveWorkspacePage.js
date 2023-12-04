@@ -10,11 +10,12 @@ const RemoveWorkspacePage = () => {
   );
   const dispatch = useDispatch();
   const [success, setSuccess] = useState(null);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [fail, setFail] = useState(null);
 
   useEffect(() => {
     dispatch(getWorkspaces(token));
-  }, [dispatch, token]);
+  }, [dispatch, token, isSuccess]);
 
   const handleDelete = async (id) => {
     console.log(id);
@@ -24,6 +25,7 @@ const RemoveWorkspacePage = () => {
     };
     const actionResult = await dispatch(deleteWorkspace(sendData));
     if (actionResult.payload) {
+      setIsSuccess(!isSuccess);
       setSuccess(actionResult.payload.success);
       console.log(actionResult.payload);
     }
@@ -36,7 +38,7 @@ const RemoveWorkspacePage = () => {
     const timer = setTimeout(() => {
       setSuccess(null);
       setFail(null);
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [success, fail]);
