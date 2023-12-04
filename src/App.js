@@ -1,9 +1,9 @@
+import { React } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getReservations } from './redux/reservations/reservationsSlice';
-import { getWorkspaces } from './redux/workspaces/workspacesSlice';
+import Cookies from 'js-cookie';
+
+import { setToken, clearToken } from './redux/auth/authSlice';
 
 import Layout from './routes/Layout';
 import HomePage from './routes/HomePage';
@@ -21,13 +21,19 @@ import RemoveWorkspacePage from './routes/RemoveWorkspacePage';
 
 import ErrorPage from './routes/ErrorPage';
 
-const Root = () => {
+const App = () => {
   const dispatch = useDispatch();
+  const token = Cookies.get('token');
+  const username = Cookies.get('username');
 
-  useEffect(() => {
-    dispatch(getWorkspaces());
-    dispatch(getReservations());
-  }, [dispatch]);
+  if (token) {
+    dispatch(setToken({
+      username,
+      token,
+    }));
+  } else {
+    dispatch(clearToken());
+  }
 
   return (
     <Routes>
@@ -52,4 +58,4 @@ const Root = () => {
   );
 };
 
-export default Root;
+export default App;
