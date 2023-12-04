@@ -21,12 +21,12 @@ export const getWorkspaces = createAsyncThunk(
 
 export const postWorkspace = createAsyncThunk(
   'workspaces/postworkspaces',
-  async (newData, thunkAPI) => {
+  async (newData, { rejectWithValue }) => {
     try {
       const response = await axios.post(WORKSPACES_URL, newData);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   },
 );
