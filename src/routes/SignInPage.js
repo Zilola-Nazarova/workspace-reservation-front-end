@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 import styles from '../styles/SignInPage.module.css';
 import { setToken } from '../redux/auth/authSlice';
 
@@ -20,17 +22,11 @@ const SignInPage = () => {
       });
       if (response.status === 200) {
         // Save the token in redux store
-        dispatch(setToken(response.data.user.authentication_token));
+        dispatch(setToken(response.data));
 
-        // Guys you can use useSelector to get the
-        // token from the store and isAuthenicated
-        // from the store to use it for conditional rendering.
-
-        // Save the user in local storage
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-
-        // you can use this to get the user from
-        // local storage like his id or username. I hope Everything is clear now.
+        // Save the token in Cookies
+        Cookies.set('token', response.data.token, { expires: 7, secure: true });
+        Cookies.set('username', response.data.username, { expires: 7, secure: true });
 
         setSuccessMessage(`User with username "${username}" successfully signed in. Redirecting to home page...`);
         setUsername('');
