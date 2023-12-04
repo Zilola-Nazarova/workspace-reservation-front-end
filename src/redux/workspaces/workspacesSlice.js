@@ -20,7 +20,7 @@ export const getWorkspaces = createAsyncThunk(
 );
 
 export const postWorkspace = createAsyncThunk(
-  'workspaces/postworkspaces',
+  'workspaces/postWorkspaces',
   async (newData, { rejectWithValue }) => {
     const { data, token } = newData;
     try {
@@ -29,6 +29,26 @@ export const postWorkspace = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
+export const deleteWorkspace = createAsyncThunk(
+  'workspaces/deleteWorkspaces',
+  async (deleteData, { rejectWithValue }) => {
+    const { id, token } = deleteData;
+    try {
+      const response = await axios.delete(
+        `http://127.0.0.1:3000/api/v1/workspaces/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
