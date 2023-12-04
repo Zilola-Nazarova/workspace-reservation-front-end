@@ -1,13 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { React, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
 import Workspaces from '../components/Workspaces';
 
 const HomePage = () => {
-  // Use token and isAuthenticated from the Redux store
-  const { token, isAuthenticated } = useSelector((state) => state.auth);
+  const { username, token, isAuthenticated } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  // Use user info from local storage
-  const user = JSON.parse(localStorage.getItem('user'));
+  useEffect(() => {
+    dispatch(getWorkspaces(token));
+  }, [dispatch, token]);
 
   return (
     <>
@@ -18,12 +21,9 @@ const HomePage = () => {
         <div>
           <p>
             Welcome,
-            {user && user.username}
+            {' '}
+            { username }
             !
-          </p>
-          <p>
-            Your token:
-            {token}
           </p>
         </div>
       )}
