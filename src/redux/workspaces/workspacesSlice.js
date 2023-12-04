@@ -22,7 +22,7 @@ export const getWorkspaces = createAsyncThunk(
 export const postWorkspace = createAsyncThunk(
   'workspaces/postworkspaces',
   async (newData, { rejectWithValue }) => {
-    const {data, token} = newData
+    const { data, token } = newData;
     try {
       const response = await axios.post(WORKSPACES_URL, data, {
         headers: {

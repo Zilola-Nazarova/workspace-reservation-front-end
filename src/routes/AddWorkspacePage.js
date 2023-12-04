@@ -23,8 +23,8 @@ const AddWorkspacePage = () => {
     try {
       const sendData = {
         data,
-        token
-      }
+        token,
+      };
       const resultAction = await dispatch(postWorkspace(sendData));
       if (resultAction.payload.success) {
         setSuccess(resultAction.payload.success);
