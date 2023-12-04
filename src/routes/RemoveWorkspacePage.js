@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteWorkspace, getWorkspaces } from '../redux/workspaces/workspacesSlice';
 import styles from '../styles/RemoveWorkspacePage.module.css';
@@ -8,14 +9,37 @@ const RemoveWorkspacePage = () => {
     (store) => store.workspaces,
   );
   const dispatch = useDispatch();
+  const [success, setSuccess] = useState(null);
+  const [fail, setFail] = useState(null);
+
   useEffect(() => {
     dispatch(getWorkspaces(token));
   }, [dispatch, token]);
 
   const handleDelete = async (id) => {
     console.log(id);
+    const sendData = {
+      id,
+      token,
+    };
+    const actionResult = await dispatch(deleteWorkspace(sendData));
+    if (actionResult.payload) {
+      setSuccess(actionResult.payload.success);
+      console.log(actionResult.payload);
+    }
+    if (actionResult.payload.error) {
+      setFail(actionResult.payload.error);
+    }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSuccess(null);
+      setFail(null);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [success, fail]);
 
   if (isLoading) {
     return <div>Loading......</div>;
