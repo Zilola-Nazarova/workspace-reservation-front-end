@@ -19,6 +19,18 @@ export const getWorkspaces = createAsyncThunk(
   },
 );
 
+export const postWorkspace = createAsyncThunk(
+  'workspaces/postworkspaces',
+  async (newData, thunkAPI) => {
+    try {
+      const response = await axios.post(WORKSPACES_URL, newData);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
+
 const initialState = {
   workspaces: [],
   isLoading: false,
@@ -28,7 +40,7 @@ const initialState = {
 export const workspacesSlice = createSlice({
   name: 'workspaces',
   initialState,
-  reducers: { },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(getWorkspaces.pending, (state) => {
