@@ -22,8 +22,13 @@ export const getWorkspaces = createAsyncThunk(
 export const postWorkspace = createAsyncThunk(
   'workspaces/postworkspaces',
   async (newData, { rejectWithValue }) => {
+    const {data, token} = newData
     try {
-      const response = await axios.post(WORKSPACES_URL, newData);
+      const response = await axios.post(WORKSPACES_URL, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

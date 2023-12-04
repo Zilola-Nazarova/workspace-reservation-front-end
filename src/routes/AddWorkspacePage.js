@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postWorkspace } from '../redux/workspaces/workspacesSlice';
 import styles from '../styles/AddWorkspacePage.module.css';
 
 const AddWorkspacePage = () => {
+  const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [success, setSuccess] = useState(null);
   const [fail, setFail] = useState(null);
@@ -20,7 +21,11 @@ const AddWorkspacePage = () => {
     }
 
     try {
-      const resultAction = await dispatch(postWorkspace(data));
+      const sendData = {
+        data,
+        token
+      }
+      const resultAction = await dispatch(postWorkspace(sendData));
       if (resultAction.payload.success) {
         setSuccess(resultAction.payload.success);
       }
