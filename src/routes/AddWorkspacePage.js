@@ -25,12 +25,12 @@ const AddWorkspacePage = () => {
         data,
         token,
       };
-      const resultAction = await dispatch(postWorkspace(sendData));
-      if (resultAction.payload.success) {
-        setSuccess(resultAction.payload.success);
+      const actionResult = await dispatch(postWorkspace(sendData));
+      if (actionResult.payload.success) {
+        setSuccess(actionResult.payload.success);
       }
-      if (resultAction.payload.error) {
-        setFail(resultAction.payload.error);
+      if (actionResult.payload.error) {
+        setFail(actionResult.payload.error);
       }
     } catch (error) {
       setFail(error);
