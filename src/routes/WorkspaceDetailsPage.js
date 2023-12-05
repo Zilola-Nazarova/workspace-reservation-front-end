@@ -1,14 +1,8 @@
 import { useParams } from 'react-router-dom';
 
-// VERSION 1
-// import { useSelector } from 'react-redux';
-// END
-
-// VERSION 2
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWorkspace } from '../redux/workspaces/workspacesSlice';
-// END
 
 import styles from '../styles/WorkspaceDetails.module.css';
 import noImage from '../assets/no-image.png';
@@ -16,26 +10,12 @@ import noImage from '../assets/no-image.png';
 const WorkspaceDetailsPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-
-  // VERSION 1
-  // const { token } = useSelector((state) => state.auth);
-
-  // useEffect(() => {
-  //   dispatch(getWorkspaces(token));
-  // }, [dispatch, token]);
-
-  // const { workspaces, isLoading, error } = useSelector((store) => store.workspaces);
-  // const workspace = workspaces.find((space) => String(space.id) === id);
-  // END
-
-  // VERSION 2
   const { token } = useSelector((state) => state.auth);
   const { workspace, isLoading, error } = useSelector((store) => store.workspaces);
 
   useEffect(() => {
     dispatch(getWorkspace({ token, id }));
   }, [dispatch, token, id]);
-  // END
 
   if (isLoading) {
     return (

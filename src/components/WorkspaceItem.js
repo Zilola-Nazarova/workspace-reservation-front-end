@@ -1,28 +1,11 @@
 import PropTypes from 'prop-types';
-
-// VERSION 1
 import { useSelector } from 'react-redux';
-
-// VERSION 2
-// import { React, useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getWorkspace } from '../redux/workspaces/workspacesSlice';
 
 import noImage from '../assets/no-image.png';
 
 const WorkspaceItem = ({ spaceId }) => {
-  // VERSION 1
   const { workspaces } = useSelector((store) => store.workspaces);
   const workspace = workspaces.find((space) => Number(space.id) === spaceId);
-
-  // VERSION 2
-  // const id = spaceId;
-  // const { token } = useSelector((state) => state.auth);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getWorkspace({ token, id }));
-  // }, [dispatch, token, id]);
-  // const { workspace } = useSelector((store) => store.workspaces);
 
   if (workspace) {
     return (
