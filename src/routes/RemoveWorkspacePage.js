@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteWorkspace, getWorkspaces } from '../redux/workspaces/workspacesSlice';
+import { deleteWorkspace, getWorkspaces, resetDeleteFail } from '../redux/workspaces/workspacesSlice';
 import styles from '../styles/RemoveWorkspacePage.module.css';
+// import RemoveWorkspace from '../components/RemoveWorkspace';
 
 const RemoveWorkspacePage = () => {
   const { token } = useSelector((state) => state.auth);
-  const { workspaces, isLoading, error } = useSelector(
+  const {
+    workspaces, isLoading, error, isDeleting, deleteFail,
+  } = useSelector(
     (store) => store.workspaces,
   );
   const dispatch = useDispatch();
@@ -18,7 +21,6 @@ const RemoveWorkspacePage = () => {
   }, [dispatch, token, isSuccess]);
 
   const handleDelete = async (id) => {
-    console.log(id);
     const sendData = {
       id,
       token,
@@ -27,7 +29,6 @@ const RemoveWorkspacePage = () => {
     if (actionResult.payload) {
       setIsSuccess(!isSuccess);
       setSuccess(actionResult.payload.success);
-      console.log(actionResult.payload);
     }
     if (actionResult.payload.error) {
       setFail(actionResult.payload.error);
@@ -38,10 +39,13 @@ const RemoveWorkspacePage = () => {
     const timer = setTimeout(() => {
       setSuccess(null);
       setFail(null);
+      if (deleteFail) {
+        dispatch(resetDeleteFail);
+      }
     }, 4000);
 
     return () => clearTimeout(timer);
-  }, [success, fail]);
+  }, [success, fail, dispatch, deleteFail]);
 
   if (isLoading) {
     return <div>Loading......</div>;
@@ -59,8 +63,10 @@ const RemoveWorkspacePage = () => {
   return (
     <div className={styles.page}>
       <p>List workspaces with a delete button</p>
+      {isDeleting && <p>Deleting Workspace...</p>}
       {success && <p>{success}</p>}
       {fail && <p>{fail}</p>}
+      {deleteFail && <p>{deleteFail}</p>}
       <ul>
         {workspaces.map((space) => (
           <li key={space.id}>
