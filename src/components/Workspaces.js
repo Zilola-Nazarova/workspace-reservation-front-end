@@ -33,7 +33,7 @@ const Workspaces = () => {
               key={space.id}
               className={styles.space_card}
             >
-              <Link to={`workspaces/${space.ID}`}>
+              <Link to={`workspaces/${space.id}`}>
                 <div className={styles.image_url}>
                   {(space.image_url)
                     ? <img alt={`${space.name}`} src={space.image_url} />
