@@ -121,7 +121,7 @@ export const workspacesSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload.message;
       })
-    .addCase(postWorkspace.pending, (state) => {
+      .addCase(postWorkspace.pending, (state) => {
         state.isPosting = true;
       })
       .addCase(postWorkspace.fulfilled, (state) => {
@@ -140,7 +140,7 @@ export const workspacesSlice = createSlice({
       .addCase(deleteWorkspace.rejected, (state, action) => {
         state.isDeleting = false;
         state.deleteFail = action.payload.message;
-    });
+      });
   },
 });
 
