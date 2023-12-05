@@ -1,9 +1,92 @@
 import styles from '../styles/NewReservationPage.module.css';
+import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
+import { postReservation } from '../redux/reservations/reservationsSlice';
+import { React, useEffect, useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-const NewReservationPage = () => (
+const NewReservationPage = () => {
+  const dispatch = useDispatch();
+  const formRef = useRef(null);
+  const [success, setSuccess] = useState(null);
+  const [fail, setFail] = useState(null);
+  const resetform = () => {
+    formRef.current.reset();
+  };
+
+  const { token } = useSelector((state) => state.auth);
+  useEffect(() => {
+    dispatch(getWorkspaces(token));
+  }, [dispatch, token]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSuccess(null);
+      setFail(null);
+    }, 5000);
+
+    if (success) {
+      resetform();
+    }
+    return () => clearTimeout(timer);
+  }, [success, fail, dispatch]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      start_date: e.target.start_date.value,
+      end_date: e.target.end_date.value,
+      workspace: e.target.workspace.value,
+      city: e.target.city.value,
+    };
+    const sendData = {
+      data,
+      token,
+    };
+
+    dispatch(postReservation(sendData)).then((res) => {
+      console.log('res', res)
+      console.log('res', res.payload)
+      if (res.payload.success) {
+        console.log(res.payload.success)
+        setSuccess(res.payload.success);
+      } else if (res.payload.errors) {
+        console.log('error')
+        console.log(res.payload.errors)
+        setFail(res.payload.errors);
+      }
+    }).catch((err) => {
+      console.log(err)
+      setFail(err);
+    }
+    );
+  };
+
+  
+  return (
   <div className={styles.page}>
     <p>This is NewReservationPage</p>
+    {success && <p>{success}</p>}
+    {fail && fail.map((error) => <p>{error}</p>)}
+    <form ref={formRef} onSubmit={(e) => handleSubmit(e)}>
+        <label htmlFor="start_date">
+          Start Date:
+          <input type="date" name="start_date" id="start_date" />
+        </label>
+        <label htmlFor="end_date">
+          End Date:
+          <input type="date" name="end_date" id="end_date" />
+        </label>
+        <label htmlFor="city">
+          City:
+          <input type="text" name="city" id="city" />
+        </label>
+        <label htmlFor="workspace">
+          Workspace:
+          <input type="text" name="workspace" id="workspace" />
+        </label>
+        <button type="submit">Create New Reservation</button>
+      </form>
   </div>
-);
+)};
 
 export default NewReservationPage;

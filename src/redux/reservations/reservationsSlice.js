@@ -3,6 +3,38 @@ import axios from 'axios';
 
 const RESERVATIONS_URL = 'http://127.0.0.1:3000/api/v1/reservations';
 
+// export const postReservation = createAsyncThunk('reservations/postReservation', async (data, { rejectWithValue }) => {
+
+// const asyncThunkCreator(method, url, data, token) => {
+//   try {
+//     const response = await axios[method](url, data, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     return response.data;
+//   } catch (error) {
+//     return rejectWithValue(error.response.data);
+//   }
+// }
+
+export const postReservation = createAsyncThunk(
+  'reservations/postReservation',
+  async (newData, { rejectWithValue }) => {
+    const { data, token } = newData;
+    try {
+      const response = await axios.post(RESERVATIONS_URL, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
 export const getReservations = createAsyncThunk(
   'reservations/getReservations',
   async (token, { rejectWithValue }) => {
