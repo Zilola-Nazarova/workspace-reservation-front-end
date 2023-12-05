@@ -1,8 +1,11 @@
-import styles from '../styles/NewReservationPage.module.css';
+import {
+  React, useEffect, useRef, useState,
+} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
 import { postReservation } from '../redux/reservations/reservationsSlice';
-import { React, useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import styles from '../styles/NewReservationPage.module.css';
 
 const NewReservationPage = () => {
   const dispatch = useDispatch();
@@ -44,30 +47,22 @@ const NewReservationPage = () => {
     };
 
     dispatch(postReservation(sendData)).then((res) => {
-      console.log('res', res)
-      console.log('res', res.payload)
       if (res.payload.success) {
-        console.log(res.payload.success)
         setSuccess(res.payload.success);
       } else if (res.payload.errors) {
-        console.log('error')
-        console.log(res.payload.errors)
         setFail(res.payload.errors);
       }
     }).catch((err) => {
-      console.log(err)
       setFail(err);
-    }
-    );
+    });
   };
 
-  
   return (
-  <div className={styles.page}>
-    <p>This is NewReservationPage</p>
-    {success && <p>{success}</p>}
-    {fail && fail.map((error) => <p>{error}</p>)}
-    <form ref={formRef} onSubmit={(e) => handleSubmit(e)}>
+    <div className={styles.page}>
+      <p>This is NewReservationPage</p>
+      {success && <p>{success}</p>}
+      {fail && fail.map((error) => <p key={uuidv4()}>{error}</p>)}
+      <form ref={formRef} onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="start_date">
           Start Date:
           <input type="date" name="start_date" id="start_date" />
@@ -86,7 +81,8 @@ const NewReservationPage = () => {
         </label>
         <button type="submit">Create New Reservation</button>
       </form>
-  </div>
-)};
+    </div>
+  );
+};
 
 export default NewReservationPage;
