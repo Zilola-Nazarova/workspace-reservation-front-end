@@ -63,7 +63,7 @@ const RemoveWorkspacePage = () => {
   return (
     <div className={styles.page}>
       <p>List workspaces with a delete button</p>
-      {isDeleting && <p>Deleting Workspace...</p>}
+      {isDeleting && <p>Deleting Workspace....</p>}
       {success && <p>{success}</p>}
       {fail && <p>{fail}</p>}
       {deleteFail && <p>{deleteFail}</p>}
