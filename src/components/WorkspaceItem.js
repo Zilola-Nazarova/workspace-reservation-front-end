@@ -1,13 +1,11 @@
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import PropTypes from 'prop-types';
 import noImage from '../assets/no-image.png';
-
-// import styles from '../styles/ReservationsPage.module.css';
 
 const WorkspaceItem = ({ spaceId }) => {
   const { workspaces } = useSelector((store) => store.workspaces);
-  const workspace = workspaces.find((space) => space.id === spaceId);
+  const workspace = workspaces.find((space) => Number(space.id) === spaceId);
 
   if (workspace) {
     return (

@@ -41,7 +41,7 @@ const ReservationsPage = () => {
         <ul className={styles.list}>
           {reservations.map((reservation, index) => (
             <li
-              key={reservation.ID}
+              key={reservation.id}
               className={styles.reservation_card}
             >
               <h2>
