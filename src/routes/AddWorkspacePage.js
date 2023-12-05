@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postWorkspace } from '../redux/workspaces/workspacesSlice';
+import { postWorkspace, resetPostFail } from '../redux/workspaces/workspacesSlice';
 import styles from '../styles/AddWorkspacePage.module.css';
 
 const AddWorkspacePage = () => {
   const { token } = useSelector((state) => state.auth);
+  const { isPosting, postFail } = useSelector(
+    (store) => store.workspaces,
+  );
   const dispatch = useDispatch();
   const [success, setSuccess] = useState(null);
   const [fail, setFail] = useState(null);
@@ -45,18 +48,23 @@ const AddWorkspacePage = () => {
     const timer = setTimeout(() => {
       setSuccess(null);
       setFail(null);
+      if (postFail) {
+        dispatch(resetPostFail);
+      }
     }, 3000);
 
     if (success) {
       resetform();
     }
     return () => clearTimeout(timer);
-  }, [success, fail]);
+  }, [success, fail, dispatch, postFail]);
 
   return (
     <div className={styles.page}>
       {success && <p>{success}</p>}
       {fail && <p>{fail}</p>}
+      {isPosting && <p>Creating Workspace...</p>}
+      {postFail && <p>{ postFail }</p>}
       <p>Create New Workspace</p>
       <form ref={formRef} onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="name">
@@ -67,7 +75,13 @@ const AddWorkspacePage = () => {
         <br />
         <label htmlFor="description">
           Description
-          <textarea name="description" id="description" rows="4" cols="50" required />
+          <textarea
+            name="description"
+            id="description"
+            rows="4"
+            cols="50"
+            required
+          />
         </label>
         <br />
         <br />
