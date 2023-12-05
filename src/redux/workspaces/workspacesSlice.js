@@ -60,12 +60,25 @@ const initialState = {
   workspaces: [],
   isLoading: false,
   error: undefined,
+  // post states
+  isPosting: false,
+  postFail: undefined,
+  // delete states
+  isDeleting: false,
+  deleteFail: undefined,
 };
 
 export const workspacesSlice = createSlice({
   name: 'workspaces',
   initialState,
-  reducers: {},
+  reducers: {
+    resetPostFail: (state) => {
+      state.postFail = undefined;
+    },
+    resetDeleteFail: (state) => {
+      state.deleteFail = undefined;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getWorkspaces.pending, (state) => {
@@ -78,8 +91,29 @@ export const workspacesSlice = createSlice({
       .addCase(getWorkspaces.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload.message;
+      })
+      .addCase(postWorkspace.pending, (state) => {
+        state.isPosting = true;
+      })
+      .addCase(postWorkspace.fulfilled, (state) => {
+        state.isPosting = false;
+      })
+      .addCase(postWorkspace.rejected, (state, action) => {
+        state.isPosting = false;
+        state.postFail = action.payload.message;
+      })
+      .addCase(deleteWorkspace.pending, (state) => {
+        state.isDeleting = true;
+      })
+      .addCase(deleteWorkspace.fulfilled, (state) => {
+        state.isDeleting = false;
+      })
+      .addCase(deleteWorkspace.rejected, (state, action) => {
+        state.isDeleting = false;
+        state.deleteFail = action.payload.message;
       });
   },
 });
 
+export const { resetPostFail, resetDeleteFail } = workspacesSlice.actions;
 export default workspacesSlice.reducer;
