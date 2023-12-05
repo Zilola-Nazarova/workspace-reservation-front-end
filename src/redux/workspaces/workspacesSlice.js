@@ -19,6 +19,23 @@ export const getWorkspaces = createAsyncThunk(
   },
 );
 
+export const getWorkspace = createAsyncThunk(
+  'workspaces/getWorkspace',
+  async (data, { rejectWithValue }) => {
+    const { id, token } = data;
+    try {
+      const resp = await axios.get(`${WORKSPACES_URL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return resp.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
 export const postWorkspace = createAsyncThunk(
   'workspaces/postworkspaces',
   async (newData, { rejectWithValue }) => {
@@ -37,6 +54,7 @@ export const postWorkspace = createAsyncThunk(
 );
 
 const initialState = {
+  workspace: {},
   workspaces: [],
   isLoading: false,
   error: undefined,
@@ -56,6 +74,17 @@ export const workspacesSlice = createSlice({
         state.workspaces = action.payload.workspaces;
       })
       .addCase(getWorkspaces.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(getWorkspace.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getWorkspace.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.workspace = action.payload.workspace;
+      })
+      .addCase(getWorkspace.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload.message;
       });
