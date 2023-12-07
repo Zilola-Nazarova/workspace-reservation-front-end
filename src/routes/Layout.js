@@ -1,14 +1,19 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../index.css';
 
 const Layout = () => (
   <>
-    <Header />
-    <main>
-      <Outlet />
-    </main>
-    <Footer />
+    <div className='flex'>
+      <div className='flex flex-col justify-between h-screen'>
+        <Header />
+        <Footer />
+      </div>
+      <main className='flex items-center bg-slate-300 w-full'>
+        <Outlet />
+      </main>
+    </div>
   </>
 );
 

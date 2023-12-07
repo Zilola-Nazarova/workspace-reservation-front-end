@@ -13,10 +13,7 @@ const HomePage = () => {
   }, [dispatch, token]);
 
   return (
-    <>
-      <h1>This is the homepage and it is Workspaces</h1>
-
-      {/* Check if user is authenticated and display user info */}
+    <div className='flex flex-col gap-8 w-full'>
       {isAuthenticated && (
         <div>
           <p>
@@ -27,9 +24,8 @@ const HomePage = () => {
           </p>
         </div>
       )}
-
       <Workspaces />
-    </>
+    </div>
   );
 };
 
