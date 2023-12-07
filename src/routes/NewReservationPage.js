@@ -21,6 +21,8 @@ const NewReservationPage = () => {
     dispatch(getWorkspaces(token));
   }, [dispatch, token]);
 
+  const workspaces = useSelector((state) => state.workspaces.workspaces);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setSuccess(null);
@@ -76,8 +78,12 @@ const NewReservationPage = () => {
           <input type="text" name="city" id="city" />
         </label>
         <label htmlFor="workspace">
-          Workspace:
-          <input type="text" name="workspace" id="workspace" />
+          Select workspace:
+          <select name="workspace" id="workspace">
+            {workspaces.map((workspace) => (
+              <option key={uuidv4()} value={workspace.id}>{workspace.name}</option>
+            ))}
+          </select>
         </label>
         <button type="submit">Create New Reservation</button>
       </form>
