@@ -9,25 +9,18 @@ const WorkspaceItem = ({ spaceId }) => {
 
   if (workspace) {
     return (
-      <div className="flex flex-col gap-4 bg-white rounded-lg p-2">
+      <div className="flex flex-col gap-4 md:bg-white rounded-lg p-2">
         <h3 className="font-bold">Details</h3>
         <p>Room name: {workspace.name}</p>
         <p>Description: {workspace.description}</p>
         {workspace.image_url ? (
           <div
-            className={`h-96 w-96 bg-cover bg-center rounded-lg`}
+            className={`h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg`}
             style={{ backgroundImage: `url(${workspace.image_url})` }}
           ></div>
         ) : (
-          <img className="h-96" alt="not provided" src={noImage} />
+          <img className="h-52 md:h-96" alt="not provided" src={noImage} />
         )}
-        {/* <div>
-          {workspace.image_url ? (
-            <img alt={`${workspace.name}`} src={workspace.image_url} />
-          ) : (
-            <img alt="not provided" src={noImage} />
-          )}
-        </div> */}
       </div>
     );
   }

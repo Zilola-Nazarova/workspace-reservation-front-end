@@ -9,7 +9,7 @@ const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i class="fa-solid fa-database"></i>
+          <i className="fa-solid fa-database"></i>
         </a>
       </li>
       <li>
@@ -18,7 +18,7 @@ const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i class="fa-solid fa-desktop"></i>
+          <i className="fa-solid fa-desktop"></i>
         </a>
       </li>
       <li>
@@ -27,7 +27,7 @@ const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i class="fa-solid fa-calendar-days"></i>
+          <i className="fa-solid fa-calendar-days"></i>
         </a>
       </li>
     </ul>

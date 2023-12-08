@@ -40,7 +40,7 @@ const ReservationsPage = () => {
         <h1 className="text-2xl font-bold">Your reservations</h1>
         <ul className="flex flex-col gap-8">
           {reservations.map((reservation, index) => (
-            <li key={reservation.id} className="flex gap-8 bg-green-50 rounded-lg shadow-lg  p-8">
+            <li key={reservation.id} className="flex flex-col md:flex-row gap-8 bg-green-50 rounded-lg shadow-lg  p-8">
               <div className="flex flex-col gap-4">
                 <h2 className="text-xl font-bold">Reservation #{index + 1}</h2>
                 <p className="">Reserved from: {reservation.start_date}</p>

@@ -95,8 +95,6 @@ const AddWorkspacePage = () => {
             className="p-4 rounded-lg border border-gray-300"
             name="description"
             id="description"
-            rows="4"
-            cols="50"
             required
           />
         </div>

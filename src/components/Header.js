@@ -14,7 +14,7 @@ const Header = () => {
           <h1>Workspaced</h1>
         </NavLink>
       </div>
-      <ul className="flex flex-col gap-8">
+      <ul className="flex flex-col gap-2 md:gap-8">
         <li className="hover:bg-green-500 p-4 rounded-lg">
           <NavLink className="text-lg" to="/">workspaces</NavLink>
         </li>

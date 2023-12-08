@@ -91,7 +91,7 @@ const NewReservationPage = () => {
             ))}
           </select>
         </div>
-        <button type="submit">Create New Reservation</button>
+        <button className="p-4 bg-green-500 rounded-full" type="submit">Create New Reservation</button>
       </form>
     </div>
   );

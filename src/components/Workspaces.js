@@ -69,7 +69,7 @@ const Workspaces = () => {
         </div>
         <div className="flex justify-evenly items-center">
           <button className="m-auto h-12 w-12 rounded-full bg-green-600 text-white" onClick={() => handlePageDownChange()}><i className="fa-solid fa-chevron-left"></i></button>
-          <ul className="flex justify-center items-center gap-4">
+          <ul className="flex justify-center items-center flex-col md:flex-row gap-4">
             {Array.isArray(workspacesToRender) && workspacesToRender.map((space) => {
               return (
                 <li key={space.id} className="bg-green-50 p-4 rounded-lg shadow-lg">

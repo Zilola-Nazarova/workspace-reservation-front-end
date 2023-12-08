@@ -77,14 +77,14 @@ const WorkspaceDetailsPage = () => {
   }
   if (workspace.name) {
     return (
-      <div className="flex justify-around items-center w-full">
+      <div className="flex flex-col md:flex-row gap-8 mt-4 justify-around items-center w-full">
         {workspace.image_url ? (
           <div
-            className={`h-96 w-96 bg-cover bg-center rounded-lg`}
+            className={`h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg`}
             style={{ backgroundImage: `url(${workspace.image_url})` }}
           ></div>
         ) : (
-          <img className="h-96" alt="not provided" src={noImage} />
+          <img className="h-52 md:h-96" alt="not provided" src={noImage} />
         )}
         <div className="flex flex-col justify-center items-center gap-8">
           <div className="flex flex-col gap-4 w-full">
@@ -112,19 +112,10 @@ const WorkspaceDetailsPage = () => {
               <input className="p-4 rounded-lg" type="text" name="city" id="city" placeholder="Tokyo" />
             </div>
             <button className="p-4 rounded-full bg-green-500" type="submit">
-            <i class="fa-solid fa-gear"></i> Reserve {workspace.name} <i class="fa-solid fa-chevron-right"></i>
+            <i className="fa-solid fa-gear"></i> Reserve {workspace.name} <i className="fa-solid fa-chevron-right"></i>
             </button>
           </form>
         </div>
-        {/* {workspace.image_url ? (
-          <img alt={`${workspace.name}`} src={workspace.image_url} />
-        ) : (
-          <img alt="not provided" src={noImage} />
-        )} */}
-        {/* <div className={workspace.workspace_info}>
-          <h2 className={workspace.name}>{workspace.name}</h2>
-          <p className={workspace.description}>{workspace.description}</p>
-        </div> */}
       </div>
     );
   }

@@ -59,8 +59,10 @@ const SignInPage = () => {
       <h1 className="text-3xl font-bold">Sign In</h1>
       {successMessage && <p className="text-green-500">{successMessage}</p>}
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-      <label htmlFor="username" className="text-lg font-semibold">
-        Username:
+      <div className="flex flex-col gap-4">
+        <label htmlFor="username" className="text-lg font-semibold">
+          Username:
+        </label>
         <input
           className="p-2 rounded-md border border-gray-300"
           type="text"
@@ -68,7 +70,7 @@ const SignInPage = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </label>
+      </div>
       <button
         className="bg-green-500 py-2 px-4 rounded-md hover:bg-green-600"
         type="button"
