@@ -1,11 +1,9 @@
-import {
-  React, useEffect, useRef, useState,
-} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
-import { postReservation } from '../redux/reservations/reservationsSlice';
-import styles from '../styles/NewReservationPage.module.css';
+import { React, useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { getWorkspaces } from "../redux/workspaces/workspacesSlice";
+import { postReservation } from "../redux/reservations/reservationsSlice";
+import styles from "../styles/NewReservationPage.module.css";
 
 const NewReservationPage = () => {
   const dispatch = useDispatch();
@@ -48,43 +46,51 @@ const NewReservationPage = () => {
       token,
     };
 
-    dispatch(postReservation(sendData)).then((res) => {
-      if (res.payload.success) {
-        setSuccess(res.payload.success);
-      } else if (res.payload.errors) {
-        setFail(res.payload.errors);
-      }
-    }).catch((err) => {
-      setFail(err);
-    });
+    dispatch(postReservation(sendData))
+      .then((res) => {
+        if (res.payload.success) {
+          setSuccess(res.payload.success);
+        } else if (res.payload.errors) {
+          setFail(res.payload.errors);
+        }
+      })
+      .catch((err) => {
+        setFail(err);
+      });
   };
 
   return (
-    <div className={styles.page}>
-      <p>This is NewReservationPage</p>
+    <div className="flex flex-col gap-8 justify-center items-center w-full">
       {success && <p>{success}</p>}
       {fail && fail.map((error) => <p key={uuidv4()}>{error}</p>)}
-      <form ref={formRef} onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="start_date">
-          Start Date:
-          <input type="date" name="start_date" id="start_date" />
-        </label>
-        <label htmlFor="end_date">
-          End Date:
-          <input type="date" name="end_date" id="end_date" />
-        </label>
-        <label htmlFor="city">
-          City:
-          <input type="text" name="city" id="city" />
-        </label>
-        <label htmlFor="workspace">
-          Select workspace:
-          <select name="workspace" id="workspace">
+      <h2 className="font-bold text-2xl">Create reservation</h2>
+      <form
+        className="flex flex-col gap-4"
+        ref={formRef}
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <div className="flex flex-col gap-2">
+          <label htmlFor="start_date">Start Date:</label>
+          <input className="p-4 rounded-lg" type="date" name="start_date" id="start_date" />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="end_date">End Date:</label>
+          <input className="p-4 rounded-lg" type="date" name="end_date" id="end_date" />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="city">City:</label>
+          <input className="p-4 rounded-lg" type="text" name="city" id="city" placeholder="Tokyo" />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="workspace">Select workspace:</label>
+          <select className="p-4 rounded-lg" name="workspace" id="workspace">
             {workspaces.map((workspace) => (
-              <option key={uuidv4()} value={workspace.id}>{workspace.name}</option>
+              <option key={uuidv4()} value={workspace.id}>
+                {workspace.name}
+              </option>
             ))}
           </select>
-        </label>
+        </div>
         <button type="submit">Create New Reservation</button>
       </form>
     </div>

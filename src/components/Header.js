@@ -8,41 +8,41 @@ const Header = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
-    <header className=" h-full flex flex-col justify-between bg-slate-500">
+    <header className="h-full flex flex-col justify-between">
       <div className="">
-        <NavLink to="/">
-          <h1>APP NAME</h1>
+        <NavLink className="text-2xl font-bold" to="/">
+          <h1>Workspaced</h1>
         </NavLink>
       </div>
       <ul className="flex flex-col gap-8">
-        <li className="navbar-item">
-          <NavLink to="/">workspaces</NavLink>
+        <li className="hover:bg-green-500 p-4 rounded-lg">
+          <NavLink className="text-lg" to="/">workspaces</NavLink>
         </li>
         {isAuthenticated ? (
           <>
-            <li className="navbar-item">
-              <NavLink to="/reservations">my reservations</NavLink>
+            <li className="hover:bg-green-500 p-4 rounded-lg">
+              <NavLink className="text-lg" to="/reservations">my reservations</NavLink>
             </li>
-            <li className="navbar-item">
-              <NavLink to="/new_reservation">reserve</NavLink>
+            <li className="hover:bg-green-500 p-4 rounded-lg">
+              <NavLink className="text-lg" to="/new_reservation">reserve</NavLink>
             </li>
-            <li className="navbar-item">
-              <NavLink to="/add_workspace">add workspace</NavLink>
+            <li className="hover:bg-green-500 p-4 rounded-lg">
+              <NavLink className="text-lg" to="/add_workspace">add workspace</NavLink>
             </li>
-            <li className="navbar-item">
-              <NavLink to="/remove_workspace">delete workspace</NavLink>
+            <li className="hover:bg-green-500 p-4 rounded-lg">
+              <NavLink className="text-lg" to="/remove_workspace">delete workspace</NavLink>
             </li>
-            <li className="navbar-item">
-              <NavLink to="/sign_out">log out</NavLink>
+            <li className="hover:bg-green-500 p-4 rounded-lg">
+              <NavLink className="text-lg" to="/sign_out">sign out</NavLink>
             </li>
           </>
         ) : (
           <>
-            <li className="navbar-item">
-              <NavLink to="/sign_in">log in</NavLink>
+            <li className="hover:bg-green-500 p-4 rounded-lg">
+              <NavLink className="text-lg" to="/sign_in">sign in</NavLink>
             </li>
-            <li className="navbar-item">
-              <NavLink to="/sign_up">sing up</NavLink>
+            <li className="hover:bg-green-500 p-4 rounded-lg">
+              <NavLink className="text-lg" to="/sign_up">sign up</NavLink>
             </li>
           </>
         )}

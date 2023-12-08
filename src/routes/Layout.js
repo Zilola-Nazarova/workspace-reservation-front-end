@@ -6,7 +6,7 @@ import '../index.css';
 const Layout = () => (
   <>
     <div className='flex'>
-      <div className='flex flex-col justify-between h-screen'>
+      <div className='flex flex-col justify-between h-screen basis-1/4 p-8'>
         <Header />
         <Footer />
       </div>

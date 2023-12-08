@@ -1,11 +1,11 @@
-import { React, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { React, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { getReservations } from '../redux/reservations/reservationsSlice';
-import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
+import { getReservations } from "../redux/reservations/reservationsSlice";
+import { getWorkspaces } from "../redux/workspaces/workspacesSlice";
 
-import WorkspaceItem from '../components/WorkspaceItem';
-import styles from '../styles/ReservationsPage.module.css';
+import WorkspaceItem from "../components/WorkspaceItem";
+import styles from "../styles/ReservationsPage.module.css";
 
 const ReservationsPage = () => {
   const dispatch = useDispatch();
@@ -16,12 +16,12 @@ const ReservationsPage = () => {
     dispatch(getWorkspaces(token));
   }, [dispatch, token]);
 
-  const { reservations, isLoading, error } = useSelector((store) => store.reservations);
+  const { reservations, isLoading, error } = useSelector(
+    (store) => store.reservations
+  );
 
   if (isLoading) {
-    return (
-      <div>Loading......</div>
-    );
+    return <div>Loading......</div>;
   }
 
   if (error) {
@@ -29,46 +29,25 @@ const ReservationsPage = () => {
       <p>
         Something went wrong!
         <br />
-        { error }
+        {error}
       </p>
     );
   }
 
   if (reservations.length > 0) {
     return (
-      <div className={styles.page}>
-        <h1>This is ReservationsPage</h1>
-        <ul className={styles.list}>
+      <div className="flex flex-col gap-12 p-8 mx-auto">
+        <h1 className="text-2xl font-bold">Your reservations</h1>
+        <ul className="flex flex-col gap-8">
           {reservations.map((reservation, index) => (
-            <li
-              key={reservation.id}
-              className={styles.reservation_card}
-            >
-              <h2>
-                Reservation #
-                { index + 1 }
-              </h2>
-
-              <div className={styles.reservation_info}>
-                <p className={styles.start_date}>
-                  Reserved from:
-                  {' '}
-                  {reservation.start_date}
-                </p>
-                <p className={styles.end_date}>
-                  To:
-                  {' '}
-                  {reservation.end_date}
-                </p>
-                <p className={styles.city}>
-                  City:
-                  {' '}
-                  {reservation.city}
-                </p>
-                <WorkspaceItem
-                  spaceId={reservation.workspace_id}
-                />
+            <li key={reservation.id} className="flex gap-8 bg-green-50 rounded-lg shadow-lg  p-8">
+              <div className="flex flex-col gap-4">
+                <h2 className="text-xl font-bold">Reservation #{index + 1}</h2>
+                <p className="">Reserved from: {reservation.start_date}</p>
+                <p className="">To: {reservation.end_date}</p>
+                <p className="">City: {reservation.city}</p>
               </div>
+              <WorkspaceItem spaceId={reservation.workspace_id} />
             </li>
           ))}
         </ul>

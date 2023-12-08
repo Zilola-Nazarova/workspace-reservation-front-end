@@ -62,33 +62,39 @@ const Workspaces = () => {
   }
   if (workspacesToRender.length > 0) {
     return (
-      <div className="flex justify-evenly items-center rounde">
-        <button className="p-4 rounded-lg bg-green-600" onClick={() => handlePageDownChange()}>Page down</button>
-        <ul className="flex justify-center items-center gap-4">
-          {Array.isArray(workspacesToRender) && workspacesToRender.map((space) => {
-            return (
-              <li key={space.id} className="bg-red-500">
-                <Link to={`workspaces/${space.id}`}>
-                  <div>
-                    {space.image_url ? (
-                      <div
-                        className={`h-52 w-52 bg-cover bg-center rounded-lg`}
-                        style={{ backgroundImage: `url(${space.image_url})` }}
-                      ></div>
-                    ) : (
-                      <img className="h-52" alt="not provided" src={noImage} />
-                    )}
-                  </div>
-                  <div className=" text-center">
-                    <h2 className={space.name}>{space.name}</h2>
-                    <p className={space.description}>{space.description}</p>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-        <button className="p-4 rounded-lg bg-green-600" onClick={() => handlePageUpChange()}>Page up</button>
+      <div className="w-full flex flex-col gap-8">
+        <div className="flex flex-col justify-center items-center">
+          <h2 className="text-2xl font-bold">Workspaces</h2>
+          <p>Please select your preferred option</p>
+        </div>
+        <div className="flex justify-evenly items-center">
+          <button className="m-auto h-12 w-12 rounded-full bg-green-600 text-white" onClick={() => handlePageDownChange()}><i className="fa-solid fa-chevron-left"></i></button>
+          <ul className="flex justify-center items-center gap-4">
+            {Array.isArray(workspacesToRender) && workspacesToRender.map((space) => {
+              return (
+                <li key={space.id} className="bg-green-50 p-4 rounded-lg shadow-lg">
+                  <Link to={`workspaces/${space.id}`} className="flex flex-col justify-center gap-8">
+                    <div>
+                      {space.image_url ? (
+                        <div
+                          className={`h-52 w-52 bg-cover bg-center rounded-lg`}
+                          style={{ backgroundImage: `url(${space.image_url})` }}
+                        ></div>
+                      ) : (
+                        <img className="h-52" alt="not provided" src={noImage} />
+                      )}
+                    </div>
+                    <div className="flex flex-col justify-center items-center gap-4">
+                      <h2 className="text-lg font-bold">{space.name}</h2>
+                      <p>{space.description}</p>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <button className="m-auto h-12 w-12 rounded-full bg-green-600  text-white" onClick={() => handlePageUpChange()}><i className="fa-solid fa-chevron-right"></i></button>
+        </div>
       </div>
     );
   }
