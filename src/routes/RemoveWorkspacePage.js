@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteWorkspace,
   getWorkspaces,
   resetDeleteFail,
-} from "../redux/workspaces/workspacesSlice";
-import styles from "../styles/RemoveWorkspacePage.module.css";
-// import RemoveWorkspace from '../components/RemoveWorkspace';
+} from '../redux/workspaces/workspacesSlice';
+import noImage from '../assets/no-image.png';
 
 const RemoveWorkspacePage = () => {
   const { token } = useSelector((state) => state.auth);
-  const { workspaces, isLoading, error, isDeleting, deleteFail } = useSelector(
-    (store) => store.workspaces
+  const {
+    workspaces, isLoading, error, isDeleting, deleteFail,
+  } = useSelector(
+    (store) => store.workspaces,
   );
   const dispatch = useDispatch();
   const [success, setSuccess] = useState(null);
@@ -90,9 +91,9 @@ const RemoveWorkspacePage = () => {
             </div>
             {space.image_url ? (
               <div
-                className={`h-52 w-52 bg-cover bg-center rounded-lg`}
+                className="h-52 w-52 bg-cover bg-center rounded-lg"
                 style={{ backgroundImage: `url(${space.image_url})` }}
-              ></div>
+              />
             ) : (
               <img className="h-52" alt="not provided" src={noImage} />
             )}

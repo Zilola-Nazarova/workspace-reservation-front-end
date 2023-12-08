@@ -2,7 +2,7 @@ import { React } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import './index.css'
+import './index.css';
 import { setToken, clearToken } from './redux/auth/authSlice';
 
 import Layout from './routes/Layout';

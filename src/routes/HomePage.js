@@ -1,12 +1,12 @@
-import { React, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { React, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getWorkspaces } from "../redux/workspaces/workspacesSlice";
-import Workspaces from "../components/Workspaces";
+import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
+import Workspaces from '../components/Workspaces';
 
 const HomePage = () => {
   const { username, token, isAuthenticated } = useSelector(
-    (state) => state.auth
+    (state) => state.auth,
   );
   const dispatch = useDispatch();
 
@@ -18,7 +18,11 @@ const HomePage = () => {
     <div className="flex flex-col gap-8 w-full">
       {isAuthenticated && (
         <div className="mx-auto">
-          <p>Welcome, {username}!</p>
+          <p>
+            Welcome,
+            {username}
+            !
+          </p>
         </div>
       )}
       <Workspaces />

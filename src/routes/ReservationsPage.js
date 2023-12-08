@@ -1,11 +1,10 @@
-import { React, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { React, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { getReservations } from "../redux/reservations/reservationsSlice";
-import { getWorkspaces } from "../redux/workspaces/workspacesSlice";
+import { getReservations } from '../redux/reservations/reservationsSlice';
+import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
 
-import WorkspaceItem from "../components/WorkspaceItem";
-import styles from "../styles/ReservationsPage.module.css";
+import WorkspaceItem from '../components/WorkspaceItem';
 
 const ReservationsPage = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const ReservationsPage = () => {
   }, [dispatch, token]);
 
   const { reservations, isLoading, error } = useSelector(
-    (store) => store.reservations
+    (store) => store.reservations,
   );
 
   if (isLoading) {
@@ -42,10 +41,22 @@ const ReservationsPage = () => {
           {reservations.map((reservation, index) => (
             <li key={reservation.id} className="flex flex-col md:flex-row gap-8 bg-green-50 rounded-lg shadow-lg  p-8">
               <div className="flex flex-col gap-4">
-                <h2 className="text-xl font-bold">Reservation #{index + 1}</h2>
-                <p className="">Reserved from: {reservation.start_date}</p>
-                <p className="">To: {reservation.end_date}</p>
-                <p className="">City: {reservation.city}</p>
+                <h2 className="text-xl font-bold">
+                  Reservation #
+                  {index + 1}
+                </h2>
+                <p className="">
+                  Reserved from:
+                  {reservation.start_date}
+                </p>
+                <p className="">
+                  To:
+                  {reservation.end_date}
+                </p>
+                <p className="">
+                  City:
+                  {reservation.city}
+                </p>
               </div>
               <WorkspaceItem spaceId={reservation.workspace_id} />
             </li>

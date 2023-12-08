@@ -1,9 +1,10 @@
-import { React, useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
-import { getWorkspaces } from "../redux/workspaces/workspacesSlice";
-import { postReservation } from "../redux/reservations/reservationsSlice";
-import styles from "../styles/NewReservationPage.module.css";
+import {
+  React, useEffect, useRef, useState,
+} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
+import { postReservation } from '../redux/reservations/reservationsSlice';
 
 const NewReservationPage = () => {
   const dispatch = useDispatch();
@@ -69,20 +70,36 @@ const NewReservationPage = () => {
         ref={formRef}
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div className="flex flex-col gap-2">
-          <label htmlFor="start_date">Start Date:</label>
-          <input className="p-4 rounded-lg" type="date" name="start_date" id="start_date" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="end_date">End Date:</label>
-          <input className="p-4 rounded-lg" type="date" name="end_date" id="end_date" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="city">City:</label>
-          <input className="p-4 rounded-lg" type="text" name="city" id="city" placeholder="Tokyo" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="workspace">Select workspace:</label>
+        <label className="flex flex-col gap-2" htmlFor="start_date">
+          Start Date:
+          <input
+            className="p-4 rounded-lg"
+            type="date"
+            name="start_date"
+            id="start_date"
+          />
+        </label>
+        <label className="flex flex-col gap-2" htmlFor="end_date">
+          End Date:
+          <input
+            className="p-4 rounded-lg"
+            type="date"
+            name="end_date"
+            id="end_date"
+          />
+        </label>
+        <label className="flex flex-col gap-2" htmlFor="city">
+          City:
+          <input
+            className="p-4 rounded-lg"
+            type="text"
+            name="city"
+            id="city"
+            placeholder="Tokyo"
+          />
+        </label>
+        <label className="flex flex-col gap-2" htmlFor="workspace">
+          Select workspace:
           <select className="p-4 rounded-lg" name="workspace" id="workspace">
             {workspaces.map((workspace) => (
               <option key={uuidv4()} value={workspace.id}>
@@ -90,8 +107,10 @@ const NewReservationPage = () => {
               </option>
             ))}
           </select>
-        </div>
-        <button className="p-4 bg-green-500 rounded-full" type="submit">Create New Reservation</button>
+        </label>
+        <button className="p-4 bg-green-500 rounded-full" type="submit">
+          Create New Reservation
+        </button>
       </form>
     </div>
   );

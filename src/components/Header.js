@@ -1,6 +1,6 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // import styles from '../styles/Header.module.css';
 
@@ -47,7 +47,7 @@ const Header = () => {
           </>
         )}
       </ul>
-      <span></span>
+      <span />
     </header>
   );
 };

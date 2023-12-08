@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import {
   postWorkspace,
   resetPostFail,
-} from "../redux/workspaces/workspacesSlice";
-import styles from "../styles/AddWorkspacePage.module.css";
+} from '../redux/workspaces/workspacesSlice';
 
 const AddWorkspacePage = () => {
   const { token } = useSelector((state) => state.auth);
@@ -17,11 +17,11 @@ const AddWorkspacePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append("workspace[name]", e.target.name.value);
-    data.append("workspace[description]", e.target.description.value);
+    data.append('workspace[name]', e.target.name.value);
+    data.append('workspace[description]', e.target.description.value);
 
     if (e.target.image.files.length > 0) {
-      data.append("workspace[image]", e.target.image.files[0]);
+      data.append('workspace[image]', e.target.image.files[0]);
     }
 
     try {
@@ -63,22 +63,25 @@ const AddWorkspacePage = () => {
   return (
     <div className="flex flex-col gap-8 justify-center items-center w-full">
       {success && <p className="text-green-500">{success}</p>}
-      {fail &&
-        fail.map((error) => (
+      {fail
+        && fail.map((error) => (
           <p key={uuidv4()} className="text-red-500">
             {error}
           </p>
         ))}
+      {isPosting && <p className="text-green-500">Creating...</p>}
       <h2 className="font-bold text-2xl">Create New Workspace</h2>
       <form
         className="flex flex-col gap-4"
         ref={formRef}
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-lg font-semibold">
-            Name:
-          </label>
+        <label
+          aria-label="name field"
+          htmlFor="name"
+          className="flex flex-col gap-2 text-lg font-semibold"
+        >
+          Name:
           <input
             className="p-4 rounded-lg border border-gray-300"
             type="text"
@@ -86,22 +89,26 @@ const AddWorkspacePage = () => {
             id="name"
             required
           />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="description" className="text-lg font-semibold">
-            Description:
-          </label>
+        </label>
+        <label
+          aria-label="description field"
+          htmlFor="description"
+          className="flex flex-col gap-2 text-lg font-semibold"
+        >
+          Description:
           <textarea
             className="p-4 rounded-lg border border-gray-300"
             name="description"
             id="description"
             required
           />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="image" className="text-lg font-semibold">
-            Image:
-          </label>
+        </label>
+        <label
+          aria-label="image field"
+          htmlFor="image"
+          className="flex flex-col gap-2"
+        >
+          Image:
           <input
             className="file:p-4 file:rounded-full file:bg-green-500 file:border-none"
             type="file"
@@ -110,7 +117,7 @@ const AddWorkspacePage = () => {
             id="image"
             required
           />
-        </div>
+        </label>
         <button
           className="bg-green-500 p-4 px-4 rounded-full hover:bg-green-600"
           type="submit"

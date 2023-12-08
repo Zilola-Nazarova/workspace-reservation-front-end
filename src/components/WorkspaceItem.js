@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-import noImage from "../assets/no-image.png";
+import noImage from '../assets/no-image.png';
 
 const WorkspaceItem = ({ spaceId }) => {
   const { workspaces } = useSelector((store) => store.workspaces);
@@ -11,13 +11,19 @@ const WorkspaceItem = ({ spaceId }) => {
     return (
       <div className="flex flex-col gap-4 md:bg-white rounded-lg p-2">
         <h3 className="font-bold">Details</h3>
-        <p>Room name: {workspace.name}</p>
-        <p>Description: {workspace.description}</p>
+        <p>
+          Room name:
+          {workspace.name}
+        </p>
+        <p>
+          Description:
+          {workspace.description}
+        </p>
         {workspace.image_url ? (
           <div
-            className={`h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg`}
+            className="h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg"
             style={{ backgroundImage: `url(${workspace.image_url})` }}
-          ></div>
+          />
         ) : (
           <img className="h-52 md:h-96" alt="not provided" src={noImage} />
         )}
