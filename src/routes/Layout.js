@@ -16,7 +16,7 @@ const Layout = () => {
           <Header />
           <Footer />
         </div>
-        <main className="pt-8 flex items-center bg-slate-50 w-full">
+        <main className="py-12 flex items-center w-full">
           <Outlet />
         </main>
       </div>

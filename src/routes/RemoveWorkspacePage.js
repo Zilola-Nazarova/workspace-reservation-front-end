@@ -74,7 +74,7 @@ const RemoveWorkspacePage = () => {
         {workspaces.map((space) => (
           <li
             key={space.id}
-            className="flex flex-col md:flex-row bg-green-50 p-4 rounded-lg items-center gap-8"
+            className="flex flex-col md:flex-row bg-green-50 p-4 rounded-lg items-center gap-8 shadow-lg"
           >
             <div className="flex flex-col gap-4 w-32">
               <p className="text-lg font-semibold">{space.name}</p>
