@@ -23,9 +23,11 @@ const Header = () => {
             <li className="hover:bg-green-500 p-4 rounded-lg">
               <NavLink className="text-lg" to="/reservations">my reservations</NavLink>
             </li>
-            <li className="hover:bg-green-500 p-4 rounded-lg">
+            {/* The Reserve Option is not needed and since commented out. */}
+
+            {/* <li className="hover:bg-green-500 p-4 rounded-lg">
               <NavLink className="text-lg" to="/new_reservation">reserve</NavLink>
-            </li>
+            </li> */}
             <li className="hover:bg-green-500 p-4 rounded-lg">
               <NavLink className="text-lg" to="/add_workspace">add workspace</NavLink>
             </li>

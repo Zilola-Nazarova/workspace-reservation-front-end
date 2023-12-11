@@ -14,7 +14,7 @@ import SignOutPage from './routes/SignOutPage';
 import SignUpPage from './routes/SignUpPage';
 
 import ProtectedLayout from './routes/ProtectedLayout';
-import NewReservationPage from './routes/NewReservationPage';
+// import NewReservationPage from './routes/NewReservationPage';
 import ReservationsPage from './routes/ReservationsPage';
 import AddWorkspacePage from './routes/AddWorkspacePage';
 import RemoveWorkspacePage from './routes/RemoveWorkspacePage';
@@ -42,7 +42,10 @@ const App = () => {
         <Route path="workspaces/:id" element={<WorkspaceDetailsPage />} />
 
         <Route path="/" element={<ProtectedLayout />}>
-          <Route path="new_reservation" element={<NewReservationPage />} />
+          {/* New Reservations is Extra Route with Redundant functionality and
+          it isn't needed as this functionality is already achieved when
+          we click on a specific workspace to reserve it. */}
+          {/* <Route path="new_reservation" element={<NewReservationPage />} /> */}
           <Route path="reservations" element={<ReservationsPage />} />
           <Route path="add_workspace" element={<AddWorkspacePage />} />
           <Route path="remove_workspace" element={<RemoveWorkspacePage />} />
