@@ -1,6 +1,6 @@
 {
-  "homepage": "https://zilola-nazarova.github.io/workspace-reservation",
-  "name": "workspace-reservation",
+  "homepage": "https://zilola-nazarova.github.io/workspace-reservation-front-end",
+  "name": "workspace-reservation-front-end",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
