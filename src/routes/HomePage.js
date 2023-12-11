@@ -5,7 +5,9 @@ import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
 import Workspaces from '../components/Workspaces';
 
 const HomePage = () => {
-  const { username, token, isAuthenticated } = useSelector((state) => state.auth);
+  const { username, token, isAuthenticated } = useSelector(
+    (state) => state.auth,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,23 +15,18 @@ const HomePage = () => {
   }, [dispatch, token]);
 
   return (
-    <>
-      <h1>This is the homepage and it is Workspaces</h1>
-
-      {/* Check if user is authenticated and display user info */}
+    <div className="flex flex-col gap-8 w-full">
       {isAuthenticated && (
-        <div>
+        <div className="mx-auto">
           <p>
             Welcome,
-            {' '}
-            { username }
+            {username}
             !
           </p>
         </div>
       )}
-
       <Workspaces />
-    </>
+    </div>
   );
 };
 

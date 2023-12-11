@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-
 import {
   React, useEffect, useRef, useState,
 } from 'react';
@@ -7,14 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { getWorkspace } from '../redux/workspaces/workspacesSlice';
 import { postReservation } from '../redux/reservations/reservationsSlice';
-import styles from '../styles/WorkspaceDetails.module.css';
+// import styles from '../styles/WorkspaceDetails.module.css';
 import noImage from '../assets/no-image.png';
 
 const WorkspaceDetailsPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { token } = useSelector((state) => state.auth);
-  const { workspace, isLoading, error } = useSelector((store) => store.workspaces);
+  const { workspace, isLoading, error } = useSelector(
+    (store) => store.workspaces,
+  );
   const formRef = useRef(null);
   const [success, setSuccess] = useState(null);
   const [fail, setFail] = useState(null);
@@ -51,65 +52,98 @@ const WorkspaceDetailsPage = () => {
       token,
     };
 
-    dispatch(postReservation(sendData)).then((res) => {
-      if (res.payload.success) {
-        setSuccess(res.payload.success);
-      } else if (res.payload.errors) {
-        setFail(res.payload.errors);
-      }
-    }).catch((err) => {
-      setFail(err);
-    });
+    dispatch(postReservation(sendData))
+      .then((res) => {
+        if (res.payload.success) {
+          setSuccess(res.payload.success);
+        } else if (res.payload.errors) {
+          setFail(res.payload.errors);
+        }
+      })
+      .catch((err) => {
+        setFail(err);
+      });
   };
 
   if (isLoading) {
-    return (
-      <div>Loading......</div>
-    );
+    return <div>Loading......</div>;
   }
   if (error) {
     return (
       <p>
         Something went wrong!
         <br />
-        { error }
+        {error}
       </p>
     );
   }
   if (workspace.name) {
     return (
-      <>
-        <div className={styles.page}>
-          <p>This is WorkspaceDetailsPage</p>
-          {success && <p>{success}</p>}
-          {fail && fail.map((error) => <p key={uuidv4()}>{error}</p>)}
-          {(workspace.image_url)
-            ? <img alt={`${workspace.name}`} src={workspace.image_url} />
-            : <img alt="not provided" src={noImage} />}
-          <div className={workspace.workspace_info}>
-            <h2 className={workspace.name}>{workspace.name}</h2>
-            <p className={workspace.description}>{workspace.description}</p>
+      <div className="flex flex-col md:flex-row gap-8 mt-4 justify-around items-center w-full">
+        {workspace.image_url ? (
+          <div
+            className="h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg"
+            style={{ backgroundImage: `url(${workspace.image_url})` }}
+          />
+        ) : (
+          <img className="h-52 md:h-96" alt="not provided" src={noImage} />
+        )}
+        <div className="flex flex-col justify-center items-center gap-8">
+          <div className="flex flex-col gap-4 w-full">
+            {success && <p>{success}</p>}
+            {fail && fail.map((error) => <p key={uuidv4()}>{error}</p>)}
+            <h2 className="text-2xl font-bold">Workspace</h2>
+            <p>
+              {workspace?.name}
+              {' '}
+              is available
+            </p>
+            <p>{workspace?.description}</p>
           </div>
-          <form ref={formRef} onSubmit={(e) => handleReserve(e)}>
-            <label htmlFor="start_date">
+          <form
+            className="flex flex-col gap-4 w-full"
+            ref={formRef}
+            onSubmit={(e) => handleReserve(e)}
+          >
+            <label className="flex flex-col gap-2" htmlFor="start_date">
               Start Date:
-              <input type="date" name="start_date" id="start_date" />
+              <input
+                className="p-4 rounded-lg"
+                type="date"
+                name="start_date"
+                id="start_date"
+              />
             </label>
-            <label htmlFor="end_date">
+            <label className="flex flex-col gap-2" htmlFor="end_date">
               End Date:
-              <input type="date" name="end_date" id="end_date" />
+              <input
+                className="p-4 rounded-lg"
+                type="date"
+                name="end_date"
+                id="end_date"
+              />
             </label>
-            <label htmlFor="city">
+            <label className="flex flex-col gap-2" htmlFor="city">
               City:
-              <input type="text" name="city" id="city" />
+              <input
+                className="p-4 rounded-lg"
+                type="text"
+                name="city"
+                id="city"
+                placeholder="Tokyo"
+              />
             </label>
-            <button type="submit">
+            <button className="p-4 rounded-full bg-green-500" type="submit">
+              <i className="fa-solid fa-gear" />
+              {' '}
               Reserve
               {workspace.name}
+              {' '}
+              <i className="fa-solid fa-chevron-right" />
             </button>
           </form>
         </div>
-      </>
+      </div>
     );
   }
 
