@@ -16,7 +16,7 @@ const SignInPage = () => {
   const handleSignIn = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/v1/sessions',
+        'https://workspace-reservation.onrender.com/api/v1/sessions',
         {
           username,
         },
@@ -33,13 +33,13 @@ const SignInPage = () => {
         });
 
         setSuccessMessage(
-          `User with username "${username}" successfully signed in. Redirecting to home page...`,
+          'Success! Redirecting to home page...',
         );
         setUsername('');
         setTimeout(() => {
           setSuccessMessage('');
           navigate('/');
-        }, 5000);
+        }, 2000);
       } else {
         // Handle other status codes if needed
         setErrorMessage(`Sign-in failed with status: ${response.status}`);
