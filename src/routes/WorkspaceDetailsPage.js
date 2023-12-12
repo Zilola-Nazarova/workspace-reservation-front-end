@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { getWorkspace } from '../redux/workspaces/workspacesSlice';
 import { postReservation } from '../redux/reservations/reservationsSlice';
-// import styles from '../styles/WorkspaceDetails.module.css';
+
 import noImage from '../assets/no-image.png';
 
 const WorkspaceDetailsPage = () => {
