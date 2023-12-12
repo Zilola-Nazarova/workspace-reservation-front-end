@@ -30,8 +30,12 @@ The **Workspace** app is a fullstack project that allows coworking space owners 
 
 This repository contains the frontend part of the project. The backend part can be found [here](https://github.com/badger-99/workspace-reservation-back-end)
 
+The project Kanban board can be found [here](https://github.com/users/badger-99/projects/7/views/1)
+
 ### Demo
-[Link coming soon](#)
+- [**Deployed frontend**](https://zilola-nazarova.github.io/workspace-reservation-front-end)
+
+- [**Backend documentation**](https://workspace-reservation.onrender.com/api-docs/index.html)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -99,7 +103,7 @@ Then run the app with the command
 - LinkedIn: [in/NazarovaZi](https://www.linkedin.com/in/zilola-nazarova)
 - Twitter: [@NazarovaZi](https://twitter.com/NazarovaZi)
 
-👤 **Alfred M.**
+👤 **Alfred Makongoro**
 
 - GitHub: [@badger-99](https://github.com/badger-99)
 - X: [@AlfredMkg](https://twitter.com/AlfredMkg)
