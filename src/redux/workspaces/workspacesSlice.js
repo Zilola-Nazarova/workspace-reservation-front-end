@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const WORKSPACES_URL = 'http://localhost:3000/api/v1/workspaces';
-// const WORKSPACES_URL = 'https://workspace-reservation.onrender.com/api/v1/workspaces';
+const WORKSPACES_URL = 'https://workspace-reservation.onrender.com/api/v1/workspaces';
 
 export const getWorkspaces = createAsyncThunk(
   'workspaces/getWorkspaces',
