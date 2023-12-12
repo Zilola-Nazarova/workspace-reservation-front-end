@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const RESERVATIONS_URL = 'https://workspace-reservation.onrender.com/api/v1/reservations';
+const RESERVATIONS_URL = 'http://localhost:3000/api/v1/reservations';
+// const RESERVATIONS_URL = 'https://workspace-reservation.onrender.com/api/v1/reservations';
 
 export const postReservation = createAsyncThunk(
   'reservations/postReservation',
