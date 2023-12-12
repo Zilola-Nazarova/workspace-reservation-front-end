@@ -46,15 +46,15 @@ const ReservationsPage = () => {
                   {index + 1}
                 </h2>
                 <p className="">
-                  Reserved from:
+                  Reserved from::&nbsp;
                   {reservation.start_date}
                 </p>
                 <p className="">
-                  To:
+                  To::&nbsp;
                   {reservation.end_date}
                 </p>
                 <p className="">
-                  City:
+                  City::&nbsp;
                   {reservation.city}
                 </p>
               </div>
