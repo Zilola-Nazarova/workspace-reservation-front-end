@@ -12,7 +12,7 @@ import noImage from '../assets/no-image.png';
 const WorkspaceDetailsPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { token } = useSelector((state) => state.auth);
+  const { token, isAuthenticated } = useSelector((state) => state.auth);
   const { workspace, isLoading, error } = useSelector(
     (store) => store.workspaces,
   );
@@ -133,14 +133,18 @@ const WorkspaceDetailsPage = () => {
                 placeholder="Tokyo"
               />
             </label>
-            <button className="p-4 rounded-full bg-green-500" type="submit">
-              <i className="fa-solid fa-gear" />
-              {' '}
-              Reserve
-              {workspace.name}
-              {' '}
-              <i className="fa-solid fa-chevron-right" />
-            </button>
+            { isAuthenticated ? (
+              <button className="p-4 rounded-full bg-green-500" type="submit">
+                <i className="fa-solid fa-gear" />
+                {' '}
+                Reserve
+                {workspace.name}
+                {' '}
+                <i className="fa-solid fa-chevron-right" />
+              </button>
+            ) : (
+              <p>Please sign in to reserve this room.</p>
+            )}
           </form>
         </div>
       </div>
