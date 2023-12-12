@@ -32,6 +32,14 @@ This repository contains the frontend part of the project. The backend part can 
 
 The project Kanban board can be found [here](https://github.com/users/badger-99/projects/7/views/1)
 
+The initial state of Kanban board can be found [here](https://github.com/badger-99/workspace-reservation-back-end/issues/12)
+
+Group consists of 4 students:
+1 - [Alfred Makongoro](https://github.com/badger-99)
+2 - [Zilola Nazarova](https://github.com/Zilola-Nazarova)
+3 - [Abdul Wahab Hussain](https://github.com/Abdulwhbhussain)
+4 - [Javier Hernandez](https://github.com/wickathou)
+
 ### Demo
 - [**Deployed frontend**](https://zilola-nazarova.github.io/workspace-reservation-front-end)
 
@@ -152,6 +160,7 @@ If you like this project just star it!
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
+- Original design by Murat Korkmaz on Behance - [Vespa - Responsive Redesign](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign)
 - [Microverse](https://www.microverse.org/)
 - [React Docs](https://reactjs.org/docs/getting-started.html)
 - [Redux Docs](https://redux.js.org/)
