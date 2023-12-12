@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const WORKSPACES_URL = 'http://127.0.0.1:3000/api/v1/workspaces';
+const WORKSPACES_URL = 'https://workspace-reservation.onrender.com/api/v1/workspaces';
 
 export const getWorkspaces = createAsyncThunk(
   'workspaces/getWorkspaces',
@@ -59,7 +59,7 @@ export const deleteWorkspace = createAsyncThunk(
     const { id, token } = deleteData;
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:3000/api/v1/workspaces/${id}`,
+        `${WORKSPACES_URL}/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
