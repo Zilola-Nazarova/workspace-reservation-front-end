@@ -12,13 +12,20 @@ const AddWorkspacePage = () => {
   const dispatch = useDispatch();
   const [success, setSuccess] = useState(null);
   const [fail, setFail] = useState(null);
+  const [isValid, setIsValid] = useState(null);
   const formRef = useRef(null);
+
+  const handlePriceValidation = (e) => {
+    const price = e.target.value;
+    setIsValid(/^\d+(\.\d{1,2})?$/.test(price));
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append('workspace[name]', e.target.name.value);
     data.append('workspace[description]', e.target.description.value);
+    data.append('workspace[price_per_day]', e.target.price_per_day.value);
 
     if (e.target.image.files.length > 0) {
       data.append('workspace[image]', e.target.image.files[0]);
@@ -97,9 +104,29 @@ const AddWorkspacePage = () => {
         >
           Description:
           <textarea
-            className="p-4 rounded-lg border border-gray-300"
-            name="description"
-            id="description"
+            className='p-4 rounded-lg border border-gray-300'
+            name='description'
+            id='description'
+            required
+          />
+        </label>
+        <label
+          aria-label='price_per_day field'
+          htmlFor='price_per_day'
+          className='flex flex-col gap-2 text-lg font-semibold'
+        >
+          Price per day:
+          {isValid == false && (
+            <p>Please enter a valid price with up to two decimal places</p>
+          )}
+          <input
+            className='p-2 rounded-lg border border-gray-300'
+            type='number'
+            step='0.01'
+            name='price_per_day'
+            id='price_per_day'
+            placeholder='540.99'
+            onChange={handlePriceValidation}
             required
           />
         </label>

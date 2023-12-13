@@ -99,6 +99,7 @@ const WorkspaceDetailsPage = () => {
               is available
             </p>
             <p>{workspace?.description}</p>
+            <p>Price: ${workspace?.price_per_day.toFixed(2)}/day</p>
           </div>
           <form
             className="flex flex-col gap-4 w-full"
