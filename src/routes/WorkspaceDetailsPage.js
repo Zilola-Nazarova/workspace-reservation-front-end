@@ -57,7 +57,7 @@ const WorkspaceDetailsPage = () => {
         if (res.payload.success) {
           setSuccess(res.payload.success);
         } else if (res.payload.errors) {
-          setFail(res.payload.errors);
+          throw res.payload.errors;
         }
       })
       .catch((err) => {
@@ -91,7 +91,7 @@ const WorkspaceDetailsPage = () => {
         <div className="flex flex-col justify-center items-center gap-8">
           <div className="flex flex-col gap-4 w-full">
             {success && <p>{success}</p>}
-            {fail && fail.map((error) => <p key={uuidv4()}>{error}</p>)}
+            {fail && <p key={uuidv4()}>{fail}</p>}
             <h2 className="text-2xl font-bold">Workspace</h2>
             <p>
               {workspace?.name}
@@ -138,6 +138,7 @@ const WorkspaceDetailsPage = () => {
                 <i className="fa-solid fa-gear" />
                 {' '}
                 Reserve
+                {' '}
                 {workspace.name}
                 {' '}
                 <i className="fa-solid fa-chevron-right" />
