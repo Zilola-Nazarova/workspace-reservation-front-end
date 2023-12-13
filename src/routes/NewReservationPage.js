@@ -52,7 +52,7 @@ const NewReservationPage = () => {
         if (res.payload.success) {
           setSuccess(res.payload.success);
         } else if (res.payload.errors) {
-          setFail(res.payload.errors);
+          throw res.payload.errors;
         }
       })
       .catch((err) => {
@@ -63,7 +63,7 @@ const NewReservationPage = () => {
   return (
     <div className="flex flex-col gap-8 justify-center items-center w-full">
       {success && <p>{success}</p>}
-      {fail && fail.map((error) => <p key={uuidv4()}>{error}</p>)}
+      {fail && <p key={uuidv4()}>{fail}</p>}
       <h2 className="font-bold text-2xl">Create reservation</h2>
       <form
         className="flex flex-col gap-4"
