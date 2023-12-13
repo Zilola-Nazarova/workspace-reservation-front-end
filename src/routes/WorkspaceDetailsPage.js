@@ -138,10 +138,7 @@ const WorkspaceDetailsPage = () => {
                 <i className="fa-solid fa-gear" />
                 {' '}
                 Reserve
-<<<<<<< HEAD
-=======
                 {' '}
->>>>>>> dev
                 {workspace.name}
                 {' '}
                 <i className="fa-solid fa-chevron-right" />

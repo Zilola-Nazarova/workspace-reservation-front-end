@@ -12,19 +12,11 @@ const WorkspaceItem = ({ spaceId }) => {
       <div className="flex flex-col gap-4 md:bg-white rounded-lg p-2">
         <h3 className="font-bold">Details</h3>
         <p>
-<<<<<<< HEAD
-          Room name::&nbsp;
-          {workspace.name}
-        </p>
-        <p>
-          Description::&nbsp;
-=======
           Room name:&nbsp;
           {workspace.name}
         </p>
         <p>
           Description:&nbsp;
->>>>>>> dev
           {workspace.description}
         </p>
         {workspace.image_url ? (

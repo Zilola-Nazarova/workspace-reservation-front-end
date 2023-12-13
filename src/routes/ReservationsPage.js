@@ -46,17 +46,6 @@ const ReservationsPage = () => {
                   {index + 1}
                 </h2>
                 <p className="">
-<<<<<<< HEAD
-                  Reserved from::&nbsp;
-                  {reservation.start_date}
-                </p>
-                <p className="">
-                  To::&nbsp;
-                  {reservation.end_date}
-                </p>
-                <p className="">
-                  City::&nbsp;
-=======
                   Reserved from:&nbsp;
                   {reservation.start_date}
                 </p>
@@ -66,7 +55,6 @@ const ReservationsPage = () => {
                 </p>
                 <p className="">
                   City:&nbsp;
->>>>>>> dev
                   {reservation.city}
                 </p>
               </div>
