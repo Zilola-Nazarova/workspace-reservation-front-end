@@ -79,70 +79,61 @@ const WorkspaceDetailsPage = () => {
   }
   if (workspace.name) {
     return (
-      <div className="flex flex-col md:flex-row gap-8 mt-4 justify-around items-center w-full">
+      <div className='flex flex-col md:flex-row gap-8 mt-4 justify-around items-center w-full'>
         {workspace.image_url ? (
           <div
-            className="h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg"
+            className='h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg'
             style={{ backgroundImage: `url(${workspace.image_url})` }}
           />
         ) : (
-          <img className="h-52 md:h-96" alt="not provided" src={noImage} />
+          <img className='h-52 md:h-96' alt='not provided' src={noImage} />
         )}
-        <div className="flex flex-col justify-center items-center gap-8">
-          <div className="flex flex-col gap-4 w-full">
+        <div className='flex flex-col justify-center items-center gap-8'>
+          <div className='flex flex-col gap-4 w-full'>
             {success && <p>{success}</p>}
             {fail && <p key={uuidv4()}>{fail}</p>}
-            <h2 className="text-2xl font-bold">Workspace</h2>
-            <p>
-              {workspace?.name}
-              {' '}
-              is available
-            </p>
+            <h2 className='text-2xl font-bold'>Workspace</h2>
+            <p>{workspace?.name} is available</p>
             <p>{workspace?.description}</p>
             <p>Price: ${workspace?.price_per_day.toFixed(2)}/day</p>
           </div>
           <form
-            className="flex flex-col gap-4 w-full"
+            className='flex flex-col gap-4 w-full'
             ref={formRef}
             onSubmit={(e) => handleReserve(e)}
           >
-            <label className="flex flex-col gap-2" htmlFor="start_date">
+            <label className='flex flex-col gap-2' htmlFor='start_date'>
               Start Date:
               <input
-                className="p-4 rounded-lg"
-                type="date"
-                name="start_date"
-                id="start_date"
+                className='p-4 rounded-lg'
+                type='date'
+                name='start_date'
+                id='start_date'
               />
             </label>
-            <label className="flex flex-col gap-2" htmlFor="end_date">
+            <label className='flex flex-col gap-2' htmlFor='end_date'>
               End Date:
               <input
-                className="p-4 rounded-lg"
-                type="date"
-                name="end_date"
-                id="end_date"
+                className='p-4 rounded-lg'
+                type='date'
+                name='end_date'
+                id='end_date'
               />
             </label>
-            <label className="flex flex-col gap-2" htmlFor="city">
+            <label className='flex flex-col gap-2' htmlFor='city'>
               City:
               <input
-                className="p-4 rounded-lg"
-                type="text"
-                name="city"
-                id="city"
-                placeholder="Tokyo"
+                className='p-4 rounded-lg'
+                type='text'
+                name='city'
+                id='city'
+                placeholder='Tokyo'
               />
             </label>
-            { isAuthenticated ? (
-              <button className="p-4 rounded-full bg-green-500" type="submit">
-                <i className="fa-solid fa-gear" />
-                {' '}
-                Reserve
-                {' '}
-                {workspace.name}
-                {' '}
-                <i className="fa-solid fa-chevron-right" />
+            {isAuthenticated ? (
+              <button className='p-4 rounded-full bg-green-500' type='submit'>
+                <i className='fa-solid fa-gear' /> Reserve {workspace.name}{' '}
+                <i className='fa-solid fa-chevron-right' />
               </button>
             ) : (
               <p>Please sign in to reserve this room.</p>
