@@ -7,10 +7,16 @@ import { getWorkspaces } from '../redux/workspaces/workspacesSlice';
 import { postReservation } from '../redux/reservations/reservationsSlice';
 
 const NewReservationPage = () => {
+  const workspaces = useSelector((state) => state.workspaces.workspaces);
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const [success, setSuccess] = useState(null);
   const [fail, setFail] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [cost, setCost] = useState(null);
+  const [workspaceId, setWorkspaceId] = useState(null)
+
   const resetform = () => {
     formRef.current.reset();
   };
@@ -20,7 +26,26 @@ const NewReservationPage = () => {
     dispatch(getWorkspaces(token));
   }, [dispatch, token]);
 
-  const workspaces = useSelector((state) => state.workspaces.workspaces);
+  const setStart = (e) => {
+    setStartDate(e.target.value);
+  };
+
+  const setEnd = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  useEffect(() => {
+    if (startDate && endDate && workspaceId) {
+      const workspace = workspaces.find(space => space.id == workspaceId)
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const oneDay = 1000 * 60 * 60 * 24;
+      const timeDifference = end.getTime() - start.getTime();
+      const differenceInDays = Math.round(timeDifference / oneDay);
+      const days = differenceInDays + 1;
+      setCost(workspace.price_per_day * days);
+    }
+  }, [startDate, endDate, workspaceId]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,6 +54,7 @@ const NewReservationPage = () => {
     }, 5000);
 
     if (success) {
+      setCost(0)
       resetform();
     }
     return () => clearTimeout(timer);
@@ -61,46 +87,56 @@ const NewReservationPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 justify-center items-center w-full">
+    <div className='flex flex-col gap-8 justify-center items-center w-full'>
       {success && <p>{success}</p>}
       {fail && <p key={uuidv4()}>{fail}</p>}
-      <h2 className="font-bold text-2xl">Create reservation</h2>
+      <h2 className='font-bold text-2xl'>Create reservation</h2>
       <form
-        className="flex flex-col gap-4"
+        className='flex flex-col gap-4'
         ref={formRef}
         onSubmit={(e) => handleSubmit(e)}
       >
-        <label className="flex flex-col gap-2" htmlFor="start_date">
+        <label className='flex flex-col gap-2' htmlFor='start_date'>
           Start Date:
           <input
-            className="p-4 rounded-lg"
-            type="date"
-            name="start_date"
-            id="start_date"
+            className='p-4 rounded-lg'
+            type='date'
+            name='start_date'
+            id='start_date'
+            onChange={(e) => setStart(e)}
           />
         </label>
-        <label className="flex flex-col gap-2" htmlFor="end_date">
+        <label className='flex flex-col gap-2' htmlFor='end_date'>
           End Date:
           <input
-            className="p-4 rounded-lg"
-            type="date"
-            name="end_date"
-            id="end_date"
+            className='p-4 rounded-lg'
+            type='date'
+            name='end_date'
+            id='end_date'
+            onChange={(e) => setEnd(e)}
           />
         </label>
-        <label className="flex flex-col gap-2" htmlFor="city">
+        <label className='flex flex-col gap-2' htmlFor='city'>
           City:
           <input
-            className="p-4 rounded-lg"
-            type="text"
-            name="city"
-            id="city"
-            placeholder="Tokyo"
+            className='p-4 rounded-lg'
+            type='text'
+            name='city'
+            id='city'
+            placeholder='Tokyo'
           />
         </label>
-        <label className="flex flex-col gap-2" htmlFor="workspace">
+        <label className='flex flex-col gap-2' htmlFor='workspace'>
           Select workspace:
-          <select className="p-4 rounded-lg" name="workspace" id="workspace">
+          <select
+            className='p-4 rounded-lg'
+            name='workspace'
+            id='workspace'
+            defaultValue = {'placeholder'}
+            onChange={(e) => setWorkspaceId(e.target.value)}
+            required
+          >
+            <option value='placeholder' disabled>Chose from the list.</option>
             {workspaces.map((workspace) => (
               <option key={uuidv4()} value={workspace.id}>
                 {workspace.name}
@@ -108,7 +144,18 @@ const NewReservationPage = () => {
             ))}
           </select>
         </label>
-        <button className="p-4 bg-green-500 rounded-full" type="submit">
+        <label className='flex flex-col gap-2' htmlFor='cost'>
+          Cost of Reservation:
+          <input
+            className='p-1 rounded-lg'
+            type='text'
+            name='cost'
+            id='cost'
+            value={`$${cost ? cost : 0}`}
+            readOnly
+          />
+        </label>
+        <button className='p-4 bg-green-500 rounded-full' type='submit'>
           Create New Reservation
         </button>
       </form>
