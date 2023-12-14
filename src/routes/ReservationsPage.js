@@ -35,30 +35,34 @@ const ReservationsPage = () => {
 
   if (reservations.length > 0) {
     return (
-      <div className='flex flex-col gap-12 p-8 mx-auto'>
-        <h1 className='text-2xl font-bold'>Your reservations</h1>
-        <ul className='flex flex-col gap-8'>
+      <div className="flex flex-col gap-12 p-8 mx-auto">
+        <h1 className="text-2xl font-bold">Your reservations</h1>
+        <ul className="flex flex-col gap-8">
           {reservations.map((reservation, index) => (
             <li
               key={reservation.id}
-              className='flex flex-col md:flex-row gap-8 bg-green-50 rounded-lg shadow-lg  p-8'
+              className="flex flex-col md:flex-row gap-8 bg-green-50 rounded-lg shadow-lg  p-8"
             >
-              <div className='flex flex-col gap-4'>
-                <h2 className='text-xl font-bold'>Reservation #{index + 1}</h2>
-                <p className=''>
+              <div className="flex flex-col gap-4">
+                <h2 className="text-xl font-bold">
+                  Reservation #
+                  {index + 1}
+                </h2>
+                <p className="">
                   Reserved from:&nbsp;
                   {reservation.start_date}
                 </p>
-                <p className=''>
+                <p className="">
                   To:&nbsp;
                   {reservation.end_date}
                 </p>
-                <p className=''>
+                <p className="">
                   City:&nbsp;
                   {reservation.city}
                 </p>
-                <p className=''>
-                  Rservation Cost:&nbsp; ${reservation.reservation_cost}
+                <p className="">
+                  Rservation Cost:&nbsp; $
+                  {reservation.reservation_cost}
                 </p>
               </div>
               <WorkspaceItem spaceId={reservation.workspace_id} />

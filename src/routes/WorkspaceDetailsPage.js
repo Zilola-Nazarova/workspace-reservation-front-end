@@ -31,11 +31,11 @@ const WorkspaceDetailsPage = () => {
   const setStart = (e) => {
     setStartDate(e.target.value);
   };
-  
+
   const setEnd = (e) => {
     setEndDate(e.target.value);
   };
-  
+
   useEffect(() => {
     if (startDate && endDate) {
       const start = new Date(startDate);
@@ -44,10 +44,9 @@ const WorkspaceDetailsPage = () => {
       const timeDifference = end.getTime() - start.getTime();
       const differenceInDays = Math.round(timeDifference / oneDay);
       const days = differenceInDays + 1;
-      console.log(days)
       setCost(workspace.price_per_day * days);
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, workspace.price_per_day]);
 
   useEffect(() => {
     dispatch(getWorkspace({ token, id }));
@@ -105,64 +104,80 @@ const WorkspaceDetailsPage = () => {
   }
   if (workspace.name) {
     return (
-      <div className='flex flex-col md:flex-row gap-8 mt-4 justify-around items-center w-full'>
+      <div className="flex flex-col md:flex-row gap-8 mt-4 justify-around items-center w-full">
         {workspace.image_url ? (
           <div
-            className='h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg'
+            className="h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg"
             style={{ backgroundImage: `url(${workspace.image_url})` }}
           />
         ) : (
-          <img className='h-52 md:h-96' alt='not provided' src={noImage} />
+          <img className="h-52 md:h-96" alt="not provided" src={noImage} />
         )}
-        <div className='flex flex-col justify-center items-center gap-8'>
-          <div className='flex flex-col gap-4 w-full'>
+        <div className="flex flex-col justify-center items-center gap-8">
+          <div className="flex flex-col gap-4 w-full">
             {success && <p>{success}</p>}
             {fail && <p key={uuidv4()}>{fail}</p>}
-            <h2 className='text-2xl font-bold'>Workspace</h2>
-            <p>{workspace?.name} is available</p>
+            <h2 className="text-2xl font-bold">Workspace</h2>
+            <p>
+              {workspace?.name}
+              {' '}
+              is available
+            </p>
             <p>{workspace?.description}</p>
-            <p>Price: ${workspace?.price_per_day}/day</p>
+            <p>
+              Price: $
+              {workspace?.price_per_day}
+              /day
+            </p>
           </div>
           <form
-            className='flex flex-col gap-4 w-full'
+            className="flex flex-col gap-4 w-full"
             ref={formRef}
             onSubmit={(e) => handleReserve(e)}
           >
-            <label className='flex flex-col gap-2' htmlFor='start_date'>
+            <label className="flex flex-col gap-2" htmlFor="start_date">
               Start Date:
               <input
-                className='p-4 rounded-lg'
-                type='date'
-                name='start_date'
-                id='start_date'
+                className="p-4 rounded-lg"
+                type="date"
+                name="start_date"
+                id="start_date"
                 onChange={(e) => setStart(e)}
               />
             </label>
-            <label className='flex flex-col gap-2' htmlFor='end_date'>
+            <label className="flex flex-col gap-2" htmlFor="end_date">
               End Date:
               <input
-                className='p-4 rounded-lg'
-                type='date'
-                name='end_date'
-                id='end_date'
+                className="p-4 rounded-lg"
+                type="date"
+                name="end_date"
+                id="end_date"
                 onChange={(e) => setEnd(e)}
               />
             </label>
-            <label className='flex flex-col gap-2' htmlFor='city'>
+            <label className="flex flex-col gap-2" htmlFor="city">
               City:
               <input
-                className='p-4 rounded-lg'
-                type='text'
-                name='city'
-                id='city'
-                placeholder='Tokyo'
+                className="p-4 rounded-lg"
+                type="text"
+                name="city"
+                id="city"
+                placeholder="Tokyo"
               />
             </label>
-            <p>Cost of Reservation: ${cost ? cost : 0}</p>
+            <p>
+              Cost of Reservation: $
+              {cost || 0}
+            </p>
             {isAuthenticated ? (
-              <button className='p-4 rounded-full bg-green-500' type='submit'>
-                <i className='fa-solid fa-gear' /> Reserve {workspace.name}{' '}
-                <i className='fa-solid fa-chevron-right' />
+              <button className="p-4 rounded-full bg-green-500" type="submit">
+                <i className="fa-solid fa-gear" />
+                {' '}
+                Reserve
+                {' '}
+                {workspace.name}
+                {' '}
+                <i className="fa-solid fa-chevron-right" />
               </button>
             ) : (
               <p>Please sign in to reserve this room.</p>
