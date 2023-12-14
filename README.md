@@ -97,7 +97,7 @@ Run the tests using
 
 ### Usage
 
-Then run the app with the command
+To fully interract with all the features of this application, you will need to use [this back-end repo](https://github.com/badger-99/workspace-reservation-back-end), follow the instruction, then run the app with the command
 `npm run start`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
