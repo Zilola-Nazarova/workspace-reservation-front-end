@@ -10,18 +10,43 @@ import { postReservation } from '../redux/reservations/reservationsSlice';
 import noImage from '../assets/no-image.png';
 
 const WorkspaceDetailsPage = () => {
+  const { token, isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { token, isAuthenticated } = useSelector((state) => state.auth);
-  const { workspace, isLoading, error } = useSelector(
-    (store) => store.workspaces,
-  );
   const formRef = useRef(null);
   const [success, setSuccess] = useState(null);
   const [fail, setFail] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [cost, setCost] = useState(null);
+
+  const { workspace, isLoading, error } = useSelector(
+    (store) => store.workspaces,
+  );
+
   const resetform = () => {
     formRef.current.reset();
   };
+
+  const setStart = (e) => {
+    setStartDate(e.target.value);
+  };
+
+  const setEnd = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const oneDay = 1000 * 60 * 60 * 24;
+      const timeDifference = end.getTime() - start.getTime();
+      const differenceInDays = Math.round(timeDifference / oneDay);
+      const days = differenceInDays + 1;
+      setCost(workspace.price_per_day * days);
+    }
+  }, [startDate, endDate, workspace.price_per_day]);
 
   useEffect(() => {
     dispatch(getWorkspace({ token, id }));
@@ -99,6 +124,11 @@ const WorkspaceDetailsPage = () => {
               is available
             </p>
             <p>{workspace?.description}</p>
+            <p>
+              Price: $
+              {workspace?.price_per_day}
+              /day
+            </p>
           </div>
           <form
             className="flex flex-col gap-4 w-full"
@@ -112,6 +142,7 @@ const WorkspaceDetailsPage = () => {
                 type="date"
                 name="start_date"
                 id="start_date"
+                onChange={(e) => setStart(e)}
               />
             </label>
             <label className="flex flex-col gap-2" htmlFor="end_date">
@@ -121,6 +152,7 @@ const WorkspaceDetailsPage = () => {
                 type="date"
                 name="end_date"
                 id="end_date"
+                onChange={(e) => setEnd(e)}
               />
             </label>
             <label className="flex flex-col gap-2" htmlFor="city">
@@ -133,7 +165,11 @@ const WorkspaceDetailsPage = () => {
                 placeholder="Tokyo"
               />
             </label>
-            { isAuthenticated ? (
+            <p>
+              Cost of Reservation: $
+              {cost || 0}
+            </p>
+            {isAuthenticated ? (
               <button className="p-4 rounded-full bg-green-500" type="submit">
                 <i className="fa-solid fa-gear" />
                 {' '}

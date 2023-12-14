@@ -79,11 +79,11 @@ const Workspaces = () => {
               && workspacesToRender.map((space) => (
                 <li
                   key={space.id}
-                  className="bg-green-50 p-4 rounded-lg shadow-lg"
+                  className="bg-green-50 p-4 rounded-lg shadow-lg  flex-1"
                 >
                   <Link
                     to={`workspaces/${space.id}`}
-                    className="flex flex-col justify-center gap-8"
+                    className="flex flex-col justify-center items-center gap-8"
                   >
                     <div>
                       {space.image_url ? (
@@ -101,6 +101,10 @@ const Workspaces = () => {
                     </div>
                     <div className="flex flex-col justify-center items-center gap-4">
                       <h2 className="text-lg font-bold">{space.name}</h2>
+                      <h2 className="font-bold text-green-600">
+                        $
+                        {space.price_per_day}
+                      </h2>
                       <p>{space.description}</p>
                     </div>
                   </Link>
