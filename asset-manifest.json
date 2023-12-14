@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/workspace-reservation-front-end/static/css/main.b6f4fc42.css",
-    "main.js": "/workspace-reservation-front-end/static/js/main.fdbd405b.js",
+    "main.css": "/workspace-reservation-front-end/static/css/main.a51f600b.css",
+    "main.js": "/workspace-reservation-front-end/static/js/main.60561c4e.js",
     "static/media/no-image.png": "/workspace-reservation-front-end/static/media/no-image.4ca53b4adecc1d3c90e7.png",
     "index.html": "/workspace-reservation-front-end/index.html",
-    "main.b6f4fc42.css.map": "/workspace-reservation-front-end/static/css/main.b6f4fc42.css.map",
-    "main.fdbd405b.js.map": "/workspace-reservation-front-end/static/js/main.fdbd405b.js.map"
+    "main.a51f600b.css.map": "/workspace-reservation-front-end/static/css/main.a51f600b.css.map",
+    "main.60561c4e.js.map": "/workspace-reservation-front-end/static/js/main.60561c4e.js.map"
   },
   "entrypoints": [
-    "static/css/main.b6f4fc42.css",
-    "static/js/main.fdbd405b.js"
+    "static/css/main.a51f600b.css",
+    "static/js/main.60561c4e.js"
   ]
 }
