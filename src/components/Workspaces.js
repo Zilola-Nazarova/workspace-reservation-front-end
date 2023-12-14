@@ -79,11 +79,11 @@ const Workspaces = () => {
               && workspacesToRender.map((space) => (
                 <li
                   key={space.id}
-                  className="bg-green-50 p-4 rounded-lg shadow-lg"
+                  className="bg-green-50 p-4 rounded-lg shadow-lg  flex-1"
                 >
                   <Link
                     to={`workspaces/${space.id}`}
-                    className="flex flex-col justify-center gap-8"
+                    className="flex flex-col justify-center items-center gap-8"
                   >
                     <div>
                       {space.image_url ? (
