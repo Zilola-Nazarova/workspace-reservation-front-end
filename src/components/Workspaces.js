@@ -65,16 +65,16 @@ const Workspaces = () => {
           <h2 className="text-2xl font-bold">Workspaces</h2>
           <p>Please select your preferred option</p>
         </div>
-        <div className="flex justify-evenly items-center">
+        <div className="flex justify-between items-center">
           <button
             type="button"
             aria-label="Previous workspaces"
-            className="m-auto h-12 w-12 rounded-full bg-green-600 text-white"
+            className="m-auto h-6 w-6 md:h-12 md:w-12 rounded-full bg-green-600 text-white"
             onClick={() => handlePageDownChange()}
           >
             <i className="fa-solid fa-chevron-left" />
           </button>
-          <ul className="flex justify-center items-center flex-col md:flex-row gap-4">
+          <ul className="flex max-w-xs md:max-w-3xl justify-center items-center flex-col md:flex-row gap-4">
             {Array.isArray(workspacesToRender)
               && workspacesToRender.map((space) => (
                 <li
@@ -114,7 +114,7 @@ const Workspaces = () => {
           <button
             type="button"
             aria-label="Next workspaces"
-            className="m-auto h-12 w-12 rounded-full bg-green-600  text-white"
+            className="m-auto h-6 w-6 md:h-12 md:w-12 rounded-full bg-green-600  text-white"
             onClick={() => handlePageUpChange()}
           >
             <i className="fa-solid fa-chevron-right" />

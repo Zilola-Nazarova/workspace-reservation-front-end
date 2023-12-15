@@ -104,16 +104,16 @@ const WorkspaceDetailsPage = () => {
   }
   if (workspace.name) {
     return (
-      <div className="flex flex-col md:flex-row gap-8 mt-4 justify-around items-center w-full">
+      <div className="md:p-12 flex flex-col md:flex-row gap-8 mt-4 justify-center items-center w-full">
         {workspace.image_url ? (
           <div
-            className="h-52 w-52 md:h-96 md:w-96 bg-cover bg-center rounded-lg"
+            className="h-52 w-52 md:h-96 md:w-1/2 bg-cover bg-center rounded-lg"
             style={{ backgroundImage: `url(${workspace.image_url})` }}
           />
         ) : (
           <img className="h-52 md:h-96" alt="not provided" src={noImage} />
         )}
-        <div className="flex flex-col justify-center items-center gap-8">
+        <div className="flex md:w-1/2 flex-col justify-center items-center gap-8">
           <div className="flex flex-col gap-4 w-full">
             {success && <p>{success}</p>}
             {fail && <p key={uuidv4()}>{fail}</p>}
