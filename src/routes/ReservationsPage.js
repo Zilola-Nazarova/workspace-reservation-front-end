@@ -37,7 +37,7 @@ const ReservationsPage = () => {
     return (
       <div className="flex flex-col gap-12 p-8 mx-auto">
         <h1 className="text-2xl font-bold">Your reservations</h1>
-        <ul className="flex flex-col gap-8">
+        <ul className="flex flex-col gap-8 max-w-xs md:max-w-3xl">
           {reservations.map((reservation, index) => (
             <li
               key={reservation.id}

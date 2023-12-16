@@ -12,11 +12,11 @@ const Layout = () => {
         <button type="button" aria-label="Navbar" onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
           <i className={`fa-solid ${isMenuOpen ? 'fa-circle-xmark' : 'fa-bars'}`} />
         </button>
-        <div className={`bg-white flex border-b-2 md:border-b-0 md:border-r-2 flex-col justify-between md:h-screen md:basis-1/4 p-8 md:block ${isMenuOpen ? 'block' : 'hidden'}`}>
+        <div className={`bg-white flex border-b-2 md:border-b-0 md:border-r-2 flex-col justify-between md:basis-1/4 p-8 md:block ${isMenuOpen ? 'block' : 'hidden'}`}>
           <Header />
           <Footer />
         </div>
-        <main className="py-12 flex items-center w-full">
+        <main className="py-12 px-4 flex items-center w-full">
           <Outlet />
         </main>
       </div>
